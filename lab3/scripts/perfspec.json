@@ -1,0 +1,67 @@
+{
+    "spec_version": "1.0",
+    "indicators": [
+        {
+            "id": "P90_ResponseTime_Frontend",
+            "source": "Dynatrace",
+            "query": {
+                "timeseriesId": "com.dynatrace.builtin:service.responsetime",
+                "aggregation": "p90",
+                "tags": [
+                    {
+                        "context": "CONTEXTLESS",
+                        "key": "[Environment]app",
+                        "value": "keptn-orders"
+                    },
+                    {
+                        "context": "CONTEXTLESS",
+                        "key": "service",
+                        "value": "order"
+                    }
+                ]
+            },
+            "grading": {
+                "type": "Threshold",
+                "thresholds": {
+                    "upperSevere": 500000,
+                    "upperWarning": 10000,
+                    "lowerWarning ": 0,
+                    "lowerSevere": 0
+                },
+                "metricScore": 50
+            }
+        },
+        {
+	"id": "AVG_FailureRate",
+	"source": "Dynatrace",
+	"query": {
+		"timeseriesId": "com.dynatrace.builtin:service.failurerate",
+                "aggregation": "avg",
+		"tags": [{
+			"context": "CONTEXTLESS",
+			"key": "[Environment]app",
+			"value": "keptn-orders"
+		}, {
+			"context": "CONTEXTLESS",
+			"key": "service",
+			"value": "order"
+		}]
+	},
+	"grading": {
+		"type": "Threshold",
+		"ignoreEmpty": true,
+		"thresholds": {
+			"upperSevere": 10,
+			"upperWarning": 2,
+			"lowerWarning ": 0,
+			"lowerSevere": 0
+		},
+		"metricScore": 50
+	}
+    }],
+    "objectives": {
+        "pass": 100,
+        "warning": 50
+    }
+
+}
