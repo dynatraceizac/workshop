@@ -4,16 +4,13 @@
 # process arguments
 ###################################################
 
-clear
+# number of seconds
 if [ $# -lt 1 ]
 then
-  echo "missing arguments. Expect <duration in seconds>"
-  echo "example: ./loadtest.sh 60"
-  exit 1
+  duration=120
+else
+  duration=$1 
 fi
-
-# number of seconds
-duration=$1       
 
 # default the test name to the date.  Can pass it in build number when running from a pipeline
 if [ $# -lt 2 ]

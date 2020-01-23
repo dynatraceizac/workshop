@@ -2,24 +2,24 @@
 
 clear
 
-# validate passed two arguments
-if [ $# -lt 2 ]
+# number of seconds
+if [ $# -lt 1 ]
 then
-  echo "missing arguments. Expect <DYNATRACE_API_URL> <DYNATRACE_API_TOKEN>"
-  echo "example: ./pushevent.sh https://<YOUR TENANT>.live.dynatrace.com <YOUR API TOKEN>"
+  version="1"
+else
+  version=$1 
+fi
+
+CREDS=/home/ubuntu/scripts/script-inputs.json
+
+if ! [ -f "$CREDS" ]; then
+  echo "Aborting: Missing $CREDS file"
   exit 1
 fi
 
-# if passed in a trailing slash then don't add it again
-if [[ "$1" == */ ]]
-then
-    DYNATRACE_API_URL="${1}api/v1/events"
-else
-    DYNATRACE_API_URL="${1}/api/v1/events"
-fi
-
-# set the token
-DYNATRACE_API_TOKEN="${2}"
+DT_TENANT_URL=$(cat $CREDS | jq -r '.dynatraceTenantUrl')
+DYNATRACE_API_URL="https://${DT_TENANT_URL}/api/v1/events"
+DYNATRACE_API_TOKEN=$(cat $CREDS | jq -r '.dynatraceApiToken')
 
 # build up the API request payload
 POST_DATA=$(cat <<EOF
@@ -39,15 +39,15 @@ POST_DATA=$(cat <<EOF
                 }
             ]
     },
-    "deploymentName" : "Mock Deployment for keptn-orders",
-    "deploymentVersion" : "Mock version",
+    "deploymentName" : "Deploy Version ${version}",
+    "deploymentVersion" : "${version}",
     "deploymentProject" : "keptn-orders",
-    "source" : "Manual Script",
+    "source" : "unix pushevent.sh script",
     "ciBackLink" : "http://mock-ci-link",
     "customProperties" : {
         "JenkinsUrl" : "http://mock-jenkins-link",
         "BuildUrl" : "http://mock-build-link",
-        "GitCommit" : "Mock commit"
+        "GitCommit" : "Mock commit 1234"
     }
   }
 EOF
