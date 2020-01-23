@@ -154,7 +154,7 @@ pipeline {
                   -e AS_CODE_FILES=catalogue_neoload.yaml,catalog_neoload_sla.yaml \
                   -e LG_ZONE_IDS=defaultzone:1 \
                   --network ${APP_NAME} \
-                  lcharlois/nlg:neoload-web-test-launcher-docker"
+                  neotys/neoload-web-test-launcher:latest"
 
 
 
