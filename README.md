@@ -4,8 +4,9 @@ This workshop shows you how to automate performance test execution and analysis 
 
 The workshop is broken into a set of mini-labs that are meant to be followed sequentially. The lab starts with the all the block and ends with a fully automated process.
 
-* [lab1](./lab1/README.md) - Connect to workshop VM, setup Dynatrace and demo application 
-* [lab2](./lab2/README.md) – How Dynatrace helps with performance analysis and automation
+* [lab0](./lab0/README.md) - Connect to workshop VM, setup Dynatrace and demo application 
+* [lab1](./lab1/README.md) – Dynatrace features for performance analysis and automation
+* [lab2](./lab2/README.md) – Dynatrace API for automation
 * [lab3](./lab3/README.md) – Automated performance test and analysis within a CI/CD pipeline 
 * [lab4](./lab4/README.md) – Advanced performance test automation using Neoload
 
