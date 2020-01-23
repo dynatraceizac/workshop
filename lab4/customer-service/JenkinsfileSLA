@@ -148,7 +148,7 @@ pipeline {
                                   -v $WORKSPACE/lab4/customer-service/tests/neoload/neoload_project/:/neoload-project \
                                   -e NEOLOADWEB_TOKEN=$NLAPIKEY \
                                   -e TEST_RESULT_NAME=FuncCheck_customer_${BUILD_NUMBER} \
-                                  -e SCENARIO_NAME=CustomerLoad \
+                                  -e SCENARIO_NAME=CustomerLoadSLA \
                                   -e CONTROLLER_ZONE_ID=defaultzone \
                                   -e AS_CODE_FILES=customer_neoload.yaml,customer_neoload_sla.yaml \
                                   -e LG_ZONE_IDS=defaultzone:1 \

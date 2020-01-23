@@ -5,3 +5,16 @@ sla_profiles:
   - perc-transaction-resp-time (p90) warn >= 1s fail >= 2s per test
   - error-rate warn >= 2% fail >= 5% per test
   - error-rate warn >= 5% per interval
+scenarios:
+- name: FrontLoadSLA
+  sla_profile: FrontSlaProfile
+  populations:
+  - name: Population_Dynatrace_Integration
+    constant_load:
+      users: 1
+      duration: 2m
+  - name: FrontLoad
+    constant_load:
+      users: 30
+      duration: 2m
+      rampup: 30s

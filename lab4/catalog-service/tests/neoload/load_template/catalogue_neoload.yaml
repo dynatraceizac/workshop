@@ -20,7 +20,7 @@ variables:
     value: DTID_TO_REPLACE
 - constant:
     name: jsonAnomalieDetectionFile
-    value: ${NL-CustomResources}/JSONFILE_TO_REPLACE
+    value: JSONFILE_TO_REPLACE
 - constant:
     name: outPutReferenceFile
     value: OUTPUTFILE_TO_REPLACE

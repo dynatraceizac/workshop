@@ -2546,7 +2546,7 @@
     <custom-action-parameter name="dynatraceId" type="TEXT" value="${dynatraceid}"/>
     <custom-action-parameter name="tags" type="TEXT" value="${TAGS}"/>
     <custom-action-parameter name="jsonAnomalieDetectionFile"
-        type="TEXT" value="${jsonAnomalieDetectionFile}"/>
+        type="TEXT" value="${NL-CustomResources}/${jsonAnomalieDetectionFile}"/>
     <responsePageFileDescription>recorded-responses/res_21ece89c-2a29-4dd8-b893-cc53cfadcf9d</responsePageFileDescription>
 </custom-action>
 <custom-action actionType="DynatraceMonitoringAction" isHit="false"

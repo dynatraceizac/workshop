@@ -163,7 +163,7 @@ pipeline {
                      -v $WORKSPACE/lab4/End2End/tests/neoload/neoload_project/:/neoload-project \
                      -e NEOLOADWEB_TOKEN=$NLAPIKEY \
                      -e TEST_RESULT_NAME=LoadTest_Frontend_${BUILD_NUMBER} \
-                     -e SCENARIO_NAME=FrontLoad \
+                     -e SCENARIO_NAME=FrontLoadSLA \
                      -e CONTROLLER_ZONE_ID=defaultzone \
                      -e AS_CODE_FILES=frontend_basic.yaml,Frontend_neoload_sla.yaml \
                      -e LG_ZONE_IDS=defaultzone:1 \
