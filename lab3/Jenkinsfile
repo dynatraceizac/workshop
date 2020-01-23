@@ -16,7 +16,7 @@ pipeline {
         DOCKER_COMPOSE_TEMPLATE_FILE = "lab3/docker-compose.template"
         DOCKER_COMPOSE_FILE = "lab3/docker-compose.yaml"
         WAIT_TILL_READY_FILE = "lab3/scripts/wait-till-ready.sh"
-        LOAD_TEST_FILE = "lab2/loadtest.sh"
+        LOAD_TEST_FILE = "lab2/sendtraffic.sh"
 
         // build the docker image name using tag value passed as parameters
         frontendimage = "robjahn/keptn-orders-front-end:${params.frontend_version}"
