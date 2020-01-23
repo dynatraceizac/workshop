@@ -168,7 +168,7 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 script {
-                    sh "${QUALITY_GATE_FILE} ${PERFSPEC_FILE} ${TEST_START} ${TEST_END}"
+                    sh "${QUALITY_GATE_FILE} ${TEST_START}000 ${TEST_END}000"
                 }
             }
         }
