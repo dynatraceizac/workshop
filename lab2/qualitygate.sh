@@ -2,8 +2,8 @@
 
 # service level objectives
 response_time_target=10000000
-server_error_target=0
-db_count_target=5000000
+server_error_target=2
+cpu_time_target=5000000
 
 build_query() {
 
@@ -91,8 +91,8 @@ fi
 build_query "builtin:service.response.time:percentile(95)" $START_TIME $END_TIME
 execute_query "response time 95 pct" $response_time_target
 
-build_query "builtin:service.errors.server.count" $START_TIME $END_TIME
+build_query "builtin:service.errors.server.rate" $START_TIME $END_TIME
 execute_query "error count" $server_error_target
 
 build_query "builtin:service.cpu.time" $START_TIME $END_TIME
-execute_query "cpu time" $db_count_target
+execute_query "cpu time" $cpu_time_target
