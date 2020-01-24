@@ -17,7 +17,7 @@ pipeline {
         DOCKER_COMPOSE_FILE = "lab3/docker-compose.yaml"
         WAIT_TILL_READY_FILE = "lab3/scripts/wait-till-ready.sh"
         LOAD_TEST_FILE = "lab2/sendtraffic.sh"
-        QUALITY_GATE_FILE = "lab2/qualitygate.sh"
+        VALIDATION_FILE = "helper-scripts/validate-service-levels.sh"
 
         // build the docker image name using tag value passed as parameters
         frontendimage = "robjahn/keptn-orders-front-end:${params.frontend_version}"
@@ -167,7 +167,7 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 script {
-                    sh "${QUALITY_GATE_FILE} ${TEST_START}000 ${TEST_END}000"
+                    sh "${VALIDATION_FILE} ${TEST_START}000 ${TEST_END}000"
                 }
             }
         }

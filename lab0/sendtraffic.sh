@@ -14,6 +14,9 @@ else
   duration=$1 
 fi
 
+# verify ready application is up
+. ../helper-scripts/wait-till-ready.sh
+
 ###################################################
 # set variables used by script
 ###################################################
