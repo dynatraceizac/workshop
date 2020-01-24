@@ -10,7 +10,7 @@ else
   version=$1 
 fi
 
-CREDS=/home/ubuntu/scripts/script-inputs.json
+CREDS=/home/dtu_training/scripts/script-inputs.json
 
 if ! [ -f "$CREDS" ]; then
   echo "Aborting: Missing $CREDS file"
