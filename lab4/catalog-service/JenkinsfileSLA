@@ -19,7 +19,7 @@ pipeline {
     DOCKER_COMPOSE_LG_TEMPLATE_FILE = "$WORKSPACE/lab4/infrastructure/neoLoad/lg/docker-compose.template"
     DOCKER_COMPOSE_LG_FILE = "$WORKSPACE/lab4/catalog-service/docker-compose-neoload.yml"
 
-    WAIT_TILL_READY_FILE = "$WORKSPACE/helper-scripts/wait-till-ready.sh catalog"
+    WAIT_TILL_READY_FILE = "$WORKSPACE/helper-scripts/wait-till-ready.sh"
     DT_URL = "https://${env.DT_ACCOUNTID}"
 
 
@@ -78,7 +78,7 @@ pipeline {
             steps {
 
                     sh 'chmod +x ${WAIT_TILL_READY_FILE}'
-                    sh '${WAIT_TILL_READY_FILE}'
+                    sh '${WAIT_TILL_READY_FILE}  catalog'
                     }
       }
 
