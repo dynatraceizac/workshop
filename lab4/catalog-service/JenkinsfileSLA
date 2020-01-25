@@ -34,7 +34,7 @@ pipeline {
     catalogserviceimage = "dtdemos/keptn-orders-catalog-service:${params.catalog_service_version}"
 
     slasettings="${params.sLA_rule}"
-
+     min="${slasettings}"
   }
   stages {
       stage('create docker netwrok') {
@@ -140,7 +140,7 @@ pipeline {
 
       steps {
 
-         min="${slasettings}"
+
          script {
 
 
