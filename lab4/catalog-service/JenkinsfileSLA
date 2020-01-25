@@ -33,7 +33,7 @@ pipeline {
       // build the docker image name using tag value passed as parameters
     catalogserviceimage = "dtdemos/keptn-orders-catalog-service:${params.catalog_service_version}"
 
-
+    slasettings=${params.sLA_rule}
 
   }
   stages {
@@ -142,9 +142,9 @@ pipeline {
 
 
          script {
-              min=${params.sLA_rule}
+              min=${slasettings}
 
-              switch(${params.sLA_rule}) {
+              switch(${slasettings}) {
                 case "50":
                     max="100"
                 break
