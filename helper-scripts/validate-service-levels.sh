@@ -1,9 +1,35 @@
 #!/bin/bash
 
+# $1 = from date utc
+# $2 = to date utc
+# $3 = service level target 1
+# $4 = service level target 2
+# $5 = service level target 3
+
+# get the start stop times or set defaults
+# if did not pass in start/stop times in UTC format
+# then use last few hours and now
+if [ $# -lt 2 ]
+then
+  START_TIME=$(date -d "`date -u` - 10 minutes" +'%s')000
+  END_TIME=$(date -d "`date -u`"  +'%s')000
+else
+  START_TIME=$1
+  END_TIME=$2
+fi
+
 # service level objectives
-response_time_target=10000000
-server_error_target=2
-cpu_time_target=5000000
+# with pass them all in or just default the values
+if [ $# -lt 5 ]
+then
+  response_time_target=10000000
+  server_error_target=5
+  cpu_time_target=5000000
+else
+  response_time_target=$3 
+  server_error_target=$4
+  cpu_time_target=$5
+fi
 
 build_query() {
 
@@ -73,18 +99,6 @@ fi
 DT_TENANT_URL=$(cat $CREDS | jq -r '.dynatraceTenantUrl')
 DYNATRACE_API_URL="https://${DT_TENANT_URL}/api/v2/metrics/query"
 DYNATRACE_API_TOKEN=$(cat $CREDS | jq -r '.dynatraceApiToken')
-
-# get the start stop times or set defaults
-# if did not pass in start/stop times in UTC format
-# then use last few hours and now
-if [ $# -lt 2 ]
-then
-  START_TIME=$(date -d "`date -u` - 10 minutes" +'%s')000
-  END_TIME=$(date -d "`date -u`"  +'%s')000
-else
-  START_TIME=$1
-  END_TIME=$2
-fi
 
 # process the service level checks
 
