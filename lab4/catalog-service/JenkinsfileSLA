@@ -145,15 +145,15 @@ pipeline {
               min=${params.sLA_rule}
 
               switch(${params.sLA_rule}) {
-                case "50"
+                case "50":
                     max="100"
                 break
 
-                case "100"
+                case "100":
                     max="150"
                 break
 
-                case "150"
+                case "150":
                     max="200"
                 break
               }
