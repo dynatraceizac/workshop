@@ -9,6 +9,8 @@ pipeline {
           choice(name: 'order_service_version', choices: ['1','2'], description: '1 = Normal behavior. 2 = 50% exception for /line URL and and n+1 back-end calls for /form.html')
           choice(name: 'customer_service_version', choices: ['1','2'], description: '1 = Normal behavior. 2 = High Response time for /list.html')
           choice(name: 'catalog_service_version', choices: ['1'], description: '1 = Normal behavior')
+          choice(name: 'anomaly_rule', choices: ['20','50','80'], description:''20= response time above 20ms. 50 =response time above 50ms. 80= response time above 80ms')
+
       }
   environment {
     APP_NAME = "keptn-orders"
@@ -146,6 +148,8 @@ pipeline {
                          {
                             IP= sh([script: "curl -s http://checkip.amazonaws.com", returnStdout: true]).trim()
                          }
+
+                  sh "sed -i 's/RULE_TO_REPLACE/${params.anomaly_rule}/'  $WORKSPACE/lab4/End2End/tests/neoload/load_template/custom-resources/end2end_anomalieDection.json"
                   sh "sed -i 's/HOST_TO_REPLACE/${IP}/'  ${NEOLOAD_ASCODEFILE}"
                   sh "sed -i 's/PORT_TO_REPLACE/80/' ${NEOLOAD_ASCODEFILE}"
                   sh "sed -i 's/DTID_TO_REPLACE/${DYNATRACEID}/' ${NEOLOAD_ASCODEFILE}"

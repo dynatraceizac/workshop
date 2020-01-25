@@ -6,6 +6,9 @@ pipeline {
    parameters {
           // these will be presented as build parameters
          choice(name: 'catalog_service_version', choices: ['1'], description: '1 = Normal behavior')
+         choice(name: 'anomaly_rule', choices: ['20','50','80'], description:''20= response time above 20ms. 50 =response time above 50ms. 80= response time above 80ms')
+         choice(name: 'sLA_rule', choices: ['50','100','150'], description:''50= response time between 50 and 100ms. 100 =response time between 100 and 150 ms. 150= response time between 150 and 200ms')
+
       }
   environment {
 
@@ -29,6 +32,8 @@ pipeline {
     NEOLOAD_ANOMALIEDETECTIONFILE="catalogue_anomalieDection.json"
       // build the docker image name using tag value passed as parameters
     catalogserviceimage = "dtdemos/keptn-orders-catalog-service:${params.catalog_service_version}"
+
+
 
   }
   stages {
@@ -134,6 +139,31 @@ pipeline {
 
 
       steps {
+
+
+         script {
+              min=${params.sLA_rule}
+
+              switch(${params.sLA_rule}) {
+                case "50"
+                    max="100"
+                break
+
+                case "100"
+                    max="150"
+                break
+
+                case "150"
+                    max="200"
+                break
+              }
+
+         }
+         sh "sed -i 's/RULE_TO_REPLACE/${params.anomaly_rule}/'  $WORKSPACE/lab4/catalog-service/tests/neoload/load_template/custom-resources/catalogue_anomalieDection.json"
+
+         sh "sed -i 's/MIN_TO_REPLACE/${min}/'  $WORKSPACE/lab4/catalog-service/tests/neoload/catalog_neoload_sla.yaml"
+         sh "sed -i 's/MAX_TO_REPLACE/${max}/'  $WORKSPACE/lab4/catalog-service/tests/neoload/catalog_neoload_sla.yaml"
+
 
          sh "sed -i 's/HOST_TO_REPLACE/${env.APP_NAME}/'  ${NEOLOAD_ASCODEFILE}"
          sh "sed -i 's/PORT_TO_REPLACE/8080/'  ${NEOLOAD_ASCODEFILE}"

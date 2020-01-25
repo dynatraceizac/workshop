@@ -6,6 +6,7 @@ pipeline {
    parameters {
           // these will be presented as build parameters
             choice(name: 'catalog_service_version', choices: ['1'], description: '1 = Normal behavior')
+            choice(name: 'anomaly_rule', choices: ['20','50','80'], description:''20= response time above 20ms. 50 =response time above 50ms. 80= response time above 80ms')
       }
   environment {
 
@@ -135,6 +136,7 @@ pipeline {
 
       steps {
 
+         sh "sed -i 's/RULE_TO_REPLACE/${params.anomaly_rule}/'  $WORKSPACE/lab4/catalog-service/tests/neoload/load_template/custom-resources/catalogue_anomalieDection.json"
 
          sh "sed -i 's/HOST_TO_REPLACE/${env.APP_NAME}/'  ${NEOLOAD_ASCODEFILE}"
          sh "sed -i 's/PORT_TO_REPLACE/8080/'  ${NEOLOAD_ASCODEFILE}"
