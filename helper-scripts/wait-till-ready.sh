@@ -25,13 +25,13 @@ case "$1" in
         wait_for_page "http://$IP:80"
         ;;
     "customer")
-        wait_for_page "http://$IP:8081/version"
+        wait_for_page "http://$IP:8181/version"
         ;;
     "catalog")
-        wait_for_page "http://$IP:8082/version"
+        wait_for_page "http://$IP:8182/version"
         ;;
     "order")
-        wait_for_page "http://$IP:8083/version"
+        wait_for_page "http://$IP:8183/version"
         ;;
     *)
         wait_for_page "http://$IP:80"
