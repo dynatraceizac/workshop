@@ -12,7 +12,7 @@ pipeline {
           }
   environment {
 
-    APP_NAME = "keptn-customer"
+    APP_NAME = "customer"
     DT_URL = "https://${env.DT_ACCOUNTID}"
 
     // file locations
