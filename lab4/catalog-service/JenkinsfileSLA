@@ -140,11 +140,11 @@ pipeline {
 
       steps {
 
-
+         min="${slasettings}"
          script {
-              min="${slasettings"
 
-              switch(${slasettings}) {
+
+              switch(slasettings) {
                 case "50":
                     max="100"
                 break
