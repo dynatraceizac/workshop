@@ -6,8 +6,8 @@ pipeline {
    parameters {
           // these will be presented as build parameters
          choice(name: 'catalog_service_version', choices: ['1'], description: '1 = Normal behavior')
-         choice(name: 'anomaly_rule', choices: ['20','50','80'], description:''20= response time above 20ms. 50 =response time above 50ms. 80= response time above 80ms')
-         choice(name: 'sLA_rule', choices: ['50','100','150'], description:''50= response time between 50 and 100ms. 100 =response time between 100 and 150 ms. 150= response time between 150 and 200ms')
+         choice(name: 'anomaly_rule', choices: ['20','50','80'], description:'20= response time above 20ms. 50 =response time above 50ms. 80= response time above 80ms')
+         choice(name: 'sLA_rule', choices: ['50','100','150'], description:'50= response time between 50 and 100ms. 100 =response time between 100 and 150 ms. 150= response time between 150 and 200ms')
 
       }
   environment {
