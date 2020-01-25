@@ -18,7 +18,7 @@ pipeline {
     DOCKER_COMPOSE_LG_TEMPLATE_FILE = "$WORKSPACE/lab4/infrastructure/neoLoad/lg/docker-compose.template"
     DOCKER_COMPOSE_LG_FILE = "$WORKSPACE/lab4/End2End/docker-compose-neoload.yml"
 
-    WAIT_TILL_READY_FILE = "lab3/scripts/wait-till-ready.sh"
+    WAIT_TILL_READY_FILE = "$WORKSPACE/helper-scripts/wait-till-ready.sh customer"
     DYNATRACEID="${env.DT_ACCOUNTID}"
     DYNATRACEAPIKEY="${env.DT_API_TOKEN}"
     NLAPIKEY="${env.NL_WEB_API_KEY}"
