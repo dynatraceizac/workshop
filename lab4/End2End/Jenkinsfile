@@ -9,7 +9,7 @@ pipeline {
           choice(name: 'order_service_version', choices: ['1','2'], description: '1 = Normal behavior. 2 = 50% exception for /line URL and and n+1 back-end calls for /form.html')
           choice(name: 'customer_service_version', choices: ['1','2'], description: '1 = Normal behavior. 2 = High Response time for /list.html')
           choice(name: 'catalog_service_version', choices: ['1'], description: '1 = Normal behavior')
-          choice(name: 'anomaly_rule', choices: ['20','50','80'], description:''20= response time above 20ms. 50 =response time above 50ms. 80= response time above 80ms')
+          choice(name: 'anomaly_rule', choices: ['20','50','80'], description:'20= response time above 20ms. 50 =response time above 50ms. 80= response time above 80ms')
 
       }
   environment {
@@ -20,7 +20,7 @@ pipeline {
     DOCKER_COMPOSE_LG_TEMPLATE_FILE = "$WORKSPACE/lab4/infrastructure/neoLoad/lg/docker-compose.template"
     DOCKER_COMPOSE_LG_FILE = "$WORKSPACE/lab4/End2End/docker-compose-neoload.yml"
 
-    WAIT_TILL_READY_FILE = "$WORKSPACE/helper-scripts/wait-till-ready.sh customer"
+    WAIT_TILL_READY_FILE = "$WORKSPACE/helper-scripts/wait-till-ready.sh"
     DYNATRACEID="${env.DT_ACCOUNTID}"
     DYNATRACEAPIKEY="${env.DT_API_TOKEN}"
     NLAPIKEY="${env.NL_WEB_API_KEY}"
@@ -83,7 +83,7 @@ pipeline {
                stage('wait-till-ready') {
                      steps {
                            sh 'chmod +x ${WAIT_TILL_READY_FILE}'
-                           sh "${WAIT_TILL_READY_FILE}"
+                           sh "${WAIT_TILL_READY_FILE} *"
                          }
                }
 

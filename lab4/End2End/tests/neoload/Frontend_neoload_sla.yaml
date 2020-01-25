@@ -1,7 +1,7 @@
 sla_profiles:
 - name: FrontSlaProfile
   thresholds:
-  - avg-request-resp-time warn >= 100ms fail >= 300ms per test
+  - avg-request-resp-time warn >= MIN_TO_REPLACEms fail >= MAX_TO_REPLACEms per test
   - perc-transaction-resp-time (p90) warn >= 1s fail >= 2s per test
   - error-rate warn >= 2% fail >= 5% per test
   - error-rate warn >= 5% per interval

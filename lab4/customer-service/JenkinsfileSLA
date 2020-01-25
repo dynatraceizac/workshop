@@ -6,6 +6,9 @@ pipeline {
        parameters {
               // these will be presented as build parameters
               choice(name: 'customer_service_version', choices: ['1','2'], description: '1 = Normal behavior. 2 = High Response time for /list.html')
+               choice(name: 'anomaly_rule', choices: ['20','50','80'], description:'20= response time above 20ms. 50 =response time above 50ms. 80= response time above 80ms')
+               choice(name: 'sLA_rule', choices: ['50','100','150'], description:'50= response time between 50 and 100ms. 100 =response time between 100 and 150 ms. 150= response time between 150 and 200ms')
+
           }
   environment {
 
@@ -17,7 +20,7 @@ pipeline {
     DOCKER_COMPOSE_LG_TEMPLATE_FILE = "$WORKSPACE/lab4/infrastructure/neoLoad/lg/docker-compose.template"
     DOCKER_COMPOSE_LG_FILE = "$WORKSPACE/lab4/customer-service/docker-compose-neoload.yml"
     DOCKER_COMPOSE_FILE = "$WORKSPACE/lab4/customer-service/docker-compose.yaml"
-    WAIT_TILL_READY_FILE = "$WORKSPACE/helper-scripts/wait-till-ready.sh customer"
+    WAIT_TILL_READY_FILE = "$WORKSPACE/helper-scripts/wait-till-ready.sh"
 
     DYNATRACEID="${env.DT_ACCOUNTID}"
     DYNATRACEAPIKEY="${env.DT_API_TOKEN}"
@@ -28,6 +31,8 @@ pipeline {
     NEOLOAD_ASCODESLAFILE="$WORKSPACE/lab4/customer-service/tests/neoload/customer_neoload_sla.yaml"
 
     customerserviceimage = "dtdemos/keptn-orders-customer-service:${params.customer_service_version}"
+    slasettings="${params.sLA_rule}"
+     min="${slasettings}"
 
   }
   stages {
@@ -71,7 +76,7 @@ pipeline {
             stage('wait-till-ready') {
                   steps {
                         sh 'chmod +x ${WAIT_TILL_READY_FILE}'
-                        sh "${WAIT_TILL_READY_FILE}"
+                        sh "${WAIT_TILL_READY_FILE} customer"
                   }
             }
 
@@ -132,6 +137,30 @@ pipeline {
           stage('Run functional check in dev') {
 
             steps {
+
+
+            script {
+
+
+              switch(slasettings) {
+                case "50":
+                    max="100"
+                break
+
+                case "100":
+                    max="150"
+                break
+
+                case "150":
+                    max="200"
+                break
+              }
+
+            }
+         sh "sed -i 's/RULE_TO_REPLACE/${params.anomaly_rule}/'  $WORKSPACE/lab4/customer-service/tests/neoload/load_template/custom-resources/customer_anomalieDection.json"
+
+         sh "sed -i 's/MIN_TO_REPLACE/${min}/'  $WORKSPACE/lab4/customer-service/tests/neoload/customer_neoload_sla.yaml"
+         sh "sed -i 's/MAX_TO_REPLACE/${max}/'  $WORKSPACE/lab4/customer-service/tests/neoload/customer_neoload_sla.yaml"
 
                sh "sed -i 's/HOST_TO_REPLACE/${env.APP_NAME}/' ${NEOLOAD_ASCODEFILE}"
                sh "sed -i 's/PORT_TO_REPLACE/8080/' ${NEOLOAD_ASCODEFILE}"
