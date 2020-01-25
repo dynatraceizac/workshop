@@ -6,9 +6,9 @@ pipeline {
         choice(name: 'order_service_version', choices: ['1','2'], description: '1 = Normal behavior. 2 = 50% exception for /line URL and and n+1 back-end calls for /form.html')
         choice(name: 'customer_service_version', choices: ['1','2'], description: '1 = Normal behavior. 2 = High Response time for /list.html')
         choice(name: 'catalog_service_version', choices: ['1'], description: '1 = Normal behavior')
-        string(name: 'slo1', defaultValue: '10000000', description: 'response time target')
-        string(name: 'slo2', defaultValue: '5', description: 'server error target')
-        string(name: 'slo3', defaultValue: '5000000', description: 'cpu time target')
+        string(name: 'response_time_target', defaultValue: '10000000', description: 'response time target')
+        string(name: 'server_error_target', defaultValue: '5', description: 'server error target')
+        string(name: 'cpu_time_target', defaultValue: '5000000', description: 'cpu time target')
     }
     environment {
         // stored as jenkins credentials. Values are masked
@@ -18,7 +18,7 @@ pipeline {
         // file locations3
         DOCKER_COMPOSE_TEMPLATE_FILE = "lab3/docker-compose.template"
         DOCKER_COMPOSE_FILE = "lab3/docker-compose.yaml"
-        WAIT_TILL_READY_FILE = "lab3/scripts/wait-till-ready.sh"
+        WAIT_TILL_READY_FILE = "helper-scripts/wait-till-ready.sh"
         LOAD_TEST_FILE = "lab2/sendtraffic.sh"
         VALIDATION_FILE = "helper-scripts/validate-service-levels.sh"
 
@@ -170,7 +170,7 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 script {
-                    sh "${TEST_START}000 ${TEST_END}000 ${params.slo1} ${params.slo2} ${params.slo3}"
+                    sh "${TEST_START}000 ${TEST_END}000 ${params.response_time_target} ${params.server_error_target} ${params.cpu_time_target}"
                 }
             }
         }
