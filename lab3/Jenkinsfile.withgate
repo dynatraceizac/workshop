@@ -170,7 +170,7 @@ pipeline {
         stage('Quality Gate') {
             steps {
                 script {
-                    sh "${TEST_START}000 ${TEST_END}000 ${params.response_time_target} ${params.server_error_target} ${params.cpu_time_target}"
+                    sh "${VALIDATION_FILE} ${TEST_START}000 ${TEST_END}000 ${params.response_time_target} ${params.server_error_target} ${params.cpu_time_target}"
                 }
             }
         }
