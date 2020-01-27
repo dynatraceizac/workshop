@@ -18,9 +18,9 @@ The workshop VM instance is provisioned with an SSH web client tool.  Just open 
 We will be running many commands as root.  So that the password gets cached, enter this command and enter the same password your used to connect to the VM.  Here is how he prompt looks:
 
 ```
-dtu\_training@ip-10-0-0-54:~$ sudo ls
+dtu_training@ip-10-0-0-54:~$ sudo ls
 
-[sudo] password for dtu\_training:
+[sudo] password for dtu_training:
 ```
 
 ## Install Dynatrace OneAgent
@@ -40,7 +40,7 @@ dtu\_training@ip-10-0-0-54:~$ sudo ls
     NOTE: For the last one you will need to add sudo. For example:
 
     ```
-    sudo /bin/sh Dynatrace-OneAgent-Linux-1.183.136.sh APP\_LOG\_CONTENT\_ACCESS=1 INFRA\_ONLY=0
+    sudo /bin/sh Dynatrace-OneAgent-Linux-1.183.136.sh APP_LOG_CONTENT_ACCESS=1 INFRA_ONLY=0
     ```
 
     <img src="images/dt-agent-linux.png">
@@ -185,7 +185,7 @@ This exercise shows the first way of using an environment variable called ```D
 
     ```
     environment:
-    DT\_TAGS: ";app=keptn-orders"
+    DT_TAGS: ";app=keptn-orders"
     ```
 
 1. start up the application with the new environment variables added.
