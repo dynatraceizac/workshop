@@ -1,150 +1,155 @@
-# Lab 3
+# Lab 2 Overview
 
-In this lab, learn how to run automated performance tests within a pipeline and add in 
-automated quality gates that ensure Service Level Objectives (SLO) using Service Level Indicators (SLI).
+In this lab, learn how to use Dynatrace features that support Performance testing for each phase: scripting, analysis, and reporting.
 
-The picture below shows what we will complete in this lab.
+<img src="images/process.png" width="600"/>
 
-<img src="images/lab3.png" width="600"/>
-
-Referring to the diagram above, learn how to:
-1. Review Jenkins setup
-2. Review and run pipeline files and scripts
-3. Quality Gate web service running as a Docker container
+We will use the same demo application from the previous lab and use a simple unix shell script to automate load.  
 
 # Exercises
 
-1. [Configure and review Jenkins server](#Configure-and-review-Jenkins-server)
-1. [Run the pipeline](#Run-the-pipeline)
-1. [Dashboard and Charts](#Dashboard-and-Charts)
-1. [Add Quality Gate](#Add-Quality-Gate)
-1. [Run the pipeline with Quality Gate](#Run-the-pipeline-with-Quality-Gate)
+1. [Add Dynatrace API Token](#Add-Dynatrace-API-Token)
+1. [Call Events API](#Call-Events-API)
+1. [Call Metrics v2 API](#Call-Metrics-v2-API)
+1. [Stop the sample application](#Stop-the-sample-application)
 
-## Configure and review Jenkins server
+## Add Dynatrace API Token
 
-We have installed Jenkins on the VM, but you need to complete the setup of it before we can use it.
+Dynatrace has a large set of APIs to manage the Dynatrace configuration such as tag, alert, maintainence windows and the environment such as retrieving timeseries and topology metrics, managing problems and events.
 
-1. Run this command to get your URL.  Save it to your cheatsheet.
+We need to a secure Dynatrace API token for access to the Dynatrace REST-based API.  All API calls pass this token in the request header as in this code sample:
 
-    ```
-    echo "http://$(curl -s http://checkip.amazonaws.com):8080"
-    ```
-
-1. Navigate to the URL, and login to jenkins with the credentials provided.
-
-1. Goto 'manage jenkins --> Configure System' menu
-
-1. Navigate to the 'Global properties' section and adjust these values
-
-    * DT_URL = https://[YOUR TENANT].live.dynatrace.com
-    * DT_TOKEN = [YOUR DYNATRACE API TOKEN]
-
-1. Click the ```Save``` button on the bottom of the page.
-
-## Review Jenkinsfiles
-
-Here is a diagram of the pipeline steps and interactions with Dynatrace.
-
-<img src="images/jenkins-flow.png"/>
-
-1. Review Jenkinsfiles
-
-    ```
-    cd ~/hotday/lab3
-    cat Jenkinsfile
-    ```
-
-1. Run the pipeline and review console log as it runs. This will deploy app, execute tests, push events
-
-    <img src="images/build.png"/>
-
-## Dashboard and Charts
-
-Here we will review the automated Dynatrace events, the autoamated transaction naming and ways to review the results.
-
-Run another test for a problem build.
-
-## Add Quality Gate
-
-Automated performance quality gates aim to eliminate the reliance on manual performance and architecture quality reviews following a deployment. Using a “Performance Specification” (PerfSpec) file, which defines performance and architecture metrics to query during pipeline execution, allows the collection and evaluation to be automated. Having such a PerfSpec file that is version controlled next to your source code follows the “everything-as-code” and GitOps approach
-
-In this lab, we will use a [Microservice web application](https://github.com/dt-demos/pitometer-web-service) that provides the processing logic of a passed in "perfspec" and start/end time frame. This service can be used as a software quality gate within our Jenkins pipelines.
-
-This web service runs as a Docker container listening on port 9080.
-
-### Request 
-
-POST request to https://[baseurl]:8090/api/pitometer
-JSON Body Structure
-* timeStart - start time in UTC unix seconds format used for the query
-* timeEnd - end time in UTC unix seconds format used for the query
-* perfSpec - a JSON structure containing the performance signature
-* spec_version - string property with pitometer version. Use 1.0
-* indicator - array of each indicator objects
-* objectives - object with pass and warning properties
-
-### Response
-A valid response will return an HTTP 200 with a JSON body containing these properties:
-* totalScore - numeric property with the sum of the passsing indicator metricScores
-* objectives - object with pass and warning properties passed in from the request
-* indicatorResults - array of each indicator and their specific scores and values
-* result - string property with value of 'pass', 'warn' or 'warning'
+```
+curl --request GET \
+  --url https://[YOUR TENANT].live.dynatrace.com/api/v1/event \
+  --header 'Authorization: Api-Token [YOUR API TOKEN]' 
+```
 
 ### Exercise Steps
 
-1. review the perfspec file we will use
+1. To add a new API token, in Dynatrace in the left menu navigate to ```settings --> integration --> Dynatrace API```
+
+1. Click the ```generate token``` button and enter the name ```hotday``` and enable the ```read & write configation``` settings as shown below.
+
+    <img src="images/add-token.png" width="400"/>
+
+1. Save both your Dynatrace URL your token to your cheatsheet file on your laptop. You will need this now and for the other labs.
 
     ```
-    cd ~/hotday/lab3/scripts
-    cat perfspec.json
+    Dyntrace URL: https://[YOUR TENANT].live.dynatrace.com 
+    Dyntrace Token: [YOUR DYNATRACE API TOKEN]
     ```
 
-1. start the quality gate service
+## Call Events API
 
-    ```
-    # adjust this value
-    export DT_BASEURL=https://[YOUR TENANT].live.dynatrace.com
+We are going to review how to use the [events API](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/environment-api/events/post-event/) to push information-only events to the monitored entities in our tests.  There are serveral types, but will cover the CUSTOM_DEPLOYMENT and CUSTOM_ANNOTATION types.
 
-     # adjust this value
-    export DT_TOKEN=[YOUR DYNATRACE API TOKEN]
+Here is how a CUSTOM_DEPLOYMENT looks like in Dynatrace. The benefit is that it provides immediate context and links back to tools and teams responsible for changes in the environment.  
 
-    # run this full command
-    sudo docker run -p 8090:8080 -d \
-        -e DYNATRACE_BASEURL=$DT_BASEURL \
-        -e DYNATRACE_APITOKEN=$DT_TOKEN \
-        robjahn/pitometer-web-service
+<img src="images/event.png" width="400"/>
 
-    # verify container is running
-    sudo docker ps -f "ancestor=robjahn/pitometer-web-service"
-    ```
+Each event type takes parameters as shown in the table below.
 
-1. review the quality gate script
+<img src="images/event-parameters.png" width="500"/>
 
-    ```
-    cat qualitygate.sh
-    ```
+### Exercise Steps
 
-1. run the quality gate script and review the output
-
-    ```
-    ./qualitygate.sh
-    ```
-
-## Run the pipeline with Quality Gate
-
-Here is a diagram of the additonal quality gate pipeline step and interactions with Dynatrace.
-
-<img src="images/jenkins-flow-gate.png"/>
-
-1. Review Jenkinsfile with the quality gate step added.
+1. Review the push event script and notice the ```tagRule```. This script will send a CUSTOM_DEPLOYMENT event to all the services with the ENVIRONMENT tag ```app:keptn-orders```.
 
     ```
     cd ~/hotday/lab3
-    cat Jenkinsfile.withgate
+    cat pushevent.sh
     ```
 
-1. Run the pipeline and review console log as it runs. This will deploy app, execute tests, push events
+1. Run the push event script and provide your Dynatrace tenant and API token as parameters 
 
-1. Run another test for a problem build.
+    ```
+    cd ~/hotday/lab3
+    ./pushevent.sh https://[YOUR TENANT].live.dynatrace.com [YOUR DYNATRACE API TOKEN]
+    ```
 
-:arrow_forward: [Next Lab](../lab4)
+    You should see output like this.  NOTE: Those numbers at the end map the to matching Dynatrace entity IDs.
+
+        ```
+        Pushing event to: https://[YOUR TENANT].live.dynatrace.com/api/v1/events
+
+        {"storedEventIds":[-6767884103997654659,-8278467612792737421,
+        ...
+        ...
+        ,"3582171445072147045_1576
+        726279528","8471371692288947486_1576726279528"],"storedCorrelationIds":[]}
+        ```
+
+1. Review event in Dynatrace, by navigating to any of the services.  The event table should look like this.
+
+    <img src="images/mock-event.png" width="500"/>
+
+## Call Metrics v2 API
+
+Many use cases within your software development and delivery pipelines depend on the real-time metrics that your Dynatrace environment collects. One example is the automatic check of monthly load-test results for performance reporting based on Dynatrace synthetic tests.
+
+The Dynatrace REST API endpoint ```/api/v1/timeseries``` has long enabled API consumers to ingest individual metrics for the implementation of external use-cases. In the summer of 2019, an updated of metrics API endpoint ```/api/v2/metrics/series``` based on an improved metrics framework now provides:
+* A logical tree structure for all available metric types
+* Globally unique metric keys that better integrate over multiple Dynatrace environments
+* Flexibility to extend Dynatrace and better fit it to your specific business cases
+
+Lets just show how to call it and can later read more in this [blog](https://www.dynatrace.com/news/blog/integrate-dynatrace-more-easily-using-the-new-metrics-rest-api/) and the [Dynatrace docs](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/environment-api/metric-v2/)
+
+### Exercise Steps
+
+1. In Dynatrace, navigate to the environment API page from the top right "person" icon
+
+    <img src="images/config-menu.png" width="300"/>
+
+1. On the API web page, pick the 'environment v2' API from the drop down 
+
+    <img src="images/api-v2.png" width="500"/>
+
+1. Pick the 'Authorize' button, scroll to find the 'DataExport section', paste in your API Token, and pick 'Authorize' button
+
+    <img src="images/api-authorize-v2.png" width="400"/>
+
+1. Lets first review the metrics available using the 'GET Metrics' endpoint.  This endpoint lists all metric definitions, with the parameters of each metric. 
+
+    * click the ```Try it``` button
+    * Below the 'ClearJust pick the Response content type of ```tex/csv``` 
+    * click the ```Execute``` button
+
+    <img src="images/api-call-v2.png" width="500"/>
+
+    I have saved the output to Excel and sorted it. Here are some of the service metrics available.
+
+    <img src="images/metrics-excel.png" width="600"/>
+
+1. Lets now try pulling back some metrics. 
+
+    * Expand the 'GET /metrics/series/{selector}' section.
+    * Fill in these values as to get the REQUEST COUNT for the orders service and click the 'Execute' button
+
+    | Parameters | Value |
+    |---|---|
+    | selector | builtin:service.requestCount.server |
+    | resolution | 10m |
+    | from | now-2h |
+    | scope | tag(service:order),tag([Environment]app:keptn-orders) |
+
+    The results will look like this.  Note the entity ID that is Dynatrace's internal ID for this service.
+
+    <img src="images/api-results-v2.png" width="500"/>
+
+    Experiment with other metrics and times:
+    * builtin:service.requestCount.server
+    * builtin:service.response.time:avg
+    * builtin:service.response.time:percentile(90)
+
+## Stop the sample application
+
+1. Stop the running application so that we can run the next lab
+
+    ```
+    # stop up the application
+    cd ~/hotday/lab2
+    sudo docker-downcompose down
+    ```
+
+:arrow_backward: [Previous Lab](../lab2) | [Next Lab](../lab4) :arrow_forward: 
