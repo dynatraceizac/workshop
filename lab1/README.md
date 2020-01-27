@@ -6,12 +6,10 @@ In this lab, you will:
 1. [Start the Demo Application](#Start-the-Demo-Application)
 1. [Add Tags](#Add-Tags)
 1. [Add Management Zone](#Add-Management-Zone)
-1. [Lab 1 Checklist](#Lab-1-Checklist)
-
 
 The picture below shows the setup for the lab environment and focus areas for this lab.
 
-<img src="images/lab1-setup.png" width="600">
+<img src="images/lab1-setup.png">
 
 **Connect to your VM**
 
@@ -76,7 +74,7 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
 
     The application will have 4 containers listening on these ports.
 
-    <img src="images/app-ports.png">
+    <img src="images/app-ports.png" width="400">>
 
 1. Run the docker-compose script to start up the application and verify it is running
 
@@ -104,12 +102,12 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
 1. Get the URL to the demo application by running this command:
 
     ```
-    echo ";http://$(curl -s http://checkip.amazonaws.com)";
+    echo "http://$(curl -s http://checkip.amazonaws.com)"
     ```
 
     It may take about a minute, but verify that you see version 1 for each service as shown here
 
-    <img src="images/backend-versions.png">
+    <img src="images/backend-versions.png" width="400">
 
 1. Navigate around the application get familiar with the functionality. Be sure to visit order, customer, and search functionality.
 
@@ -276,16 +274,20 @@ This exercise shows how to add a zone that filters by the tag [Environment]app
 
 1. After navigating back on the ```transactions and services``` page, you can easy distinguish the services using the management zone filter
 
-    <img src="images/mz-filter.png">
+    <img src="images/mz-filter.png" width="300">
 
 # Lab 1 Checklist
 
 In this lab, you should have completed the following:
  
 :white_check_mark: Installed the Dynatrace Agent using linux installation scripts 
+
 :white_check_mark: How to add Tags by Environment Variables 
+
 :white_check_mark: How to add Automatic Tagging rule 
+
 :white_check_mark: How to add Management Zone and use it to filter services 
+
 :white_check_mark: See how Dynatrace automatically monitors the application and where tags show up 
 
 [Next Lab](../lab2) :arrow_forward: 
