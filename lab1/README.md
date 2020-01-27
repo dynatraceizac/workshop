@@ -9,9 +9,9 @@ In this lab, you will:
 
 The picture below shows the setup for the lab environment and focus areas for this lab.
 
-<img src="images/lab1-setup.png">
+<img src="images/lab1-setup.png" width="700">
 
-**Connect to your VM**
+## Connect to your VM
 
 The workshop VM instance is provisioned with an SSH web client tool.  Just open your browser to the location provided and login with the credentials provided as shown below:
 
@@ -23,7 +23,7 @@ dtu\_training@ip-10-0-0-54:~$ sudo ls
 [sudo] password for dtu\_training:
 ```
 
-**Install Dynatrace OneAgent**
+## Install Dynatrace OneAgent
 
 1. To install Dynatrace OneAgent, first login into your Dynatrace tenant. For example: ```https://<your tenant>.sprint.dynatracelabs.com```
 
@@ -50,7 +50,7 @@ dtu\_training@ip-10-0-0-54:~$ sudo ls
 
     <img src="images/host.png">
 
-**Start the Demo Application**
+## Start the Demo Application
 
 The demo application runs using Docker Compose.  Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application's services. See the Application readme for more details.
 
@@ -144,7 +144,7 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
 
     <img src="images/service-flow.png">
 
-**Add Tags**
+## Add Tags
 
 Managing and organizing large monitoring environments is a real challenge. To effectively cope with this challenge, Dynatrace supports tags and metadata. Tags and metadata enable you to organize your monitored environments in a meaningful way.
 
@@ -158,7 +158,7 @@ We will show two ways to add tags:
 1. Environment variables
 1. Auto-tagging rules
 
-**Add Tags using Environment Variables**
+## Add Tags using Environment Variables
 
 This exercise shows the first way of using an environment variable called ```DT_TAGS``` for the Docker container process. Dynatrace will automatically pick this environment variable and assign a tag.
 
@@ -215,7 +215,7 @@ Navigate to the application in the browser.  It may take about a minute, but ver
 
     <img src="images/service-tag.png">
 
-**Add Tags using Auto Tagging rule**
+## Add Tags using Auto Tagging rule
 
 Let's now review a second way to add tags using auto-tagging rules.
 
@@ -246,7 +246,7 @@ This Exercise shows adding a rule to use the service detected name as the tag 
 
     <img src="images/service-tag-more.png">
 
-**Add Management Zone**
+## Add Management Zone
 
 Now that we have tags, we can use them in many ways such as charts, API calls as a feature called Management Zones.
 
@@ -289,5 +289,6 @@ In this lab, you should have completed the following:
 :white_check_mark: How to add Management Zone and use it to filter services 
 
 :white_check_mark: See how Dynatrace automatically monitors the application and where tags show up 
+
 
 [Next Lab](../lab2) :arrow_forward: 
