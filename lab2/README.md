@@ -1,203 +1,170 @@
-## Lab 1 Overview 
+# Lab 2 Overview
 
-The picture below shows what we will complete in this lab.
+Learn how to use Dynatrace features that support Performance testing for each phase: scripting, analysis, and reporting.  We will use the same demo application from the previous lab and use a simple Unix shell script to automate load.
 
-<img src="images/lab2-setup.png" width="600"/>
+<img src="images/process.png" >
 
-Referring to the diagram above, learn how to:
-1. Connect to the VM using a browser SSH that will be used for all the labs
-1. Review the scripts and programs have been pre-installed on this VM
-1. Start the demo application using docker-compose and pre-built images
-1. Install Dynatrace agent against your Dyntrace tenant.
+In this lab, you will:
 
-# Exercises
+1. [Tag Tests with HTTP headers](#Tag-Tests-with-HTTP-headers)
+1. [Add Request Attributes rules](#Add-Request-Naming-rules)
+1. [Add Request Naming rules](#Add-Request-Naming-rules)
 
-1. [Make a cheatsheet](make-a-cheatsheet)
-1. [Connect to your VM](#Connect-to-your-VM)
-1. [Install Dyntrace Agent](#Install-Dyntrace-Agent)
-1. [Start the Demo Application](#Start-the-Demo-Application)
-1. [Add Tags](#Add-Tags)
-1. [Add Tag rule](#Add-Tag-rule)
-1. [Add Management Zone](#Add-Management-Zone)
+## Tag Tests with HTTP headers
 
-## Make a cheatsheet
+While executing a load test from your load testing tool of choice (JMeter, Neotys, LoadRunner, etc.) each simulated HTTP request can be tagged with additional HTTP headers that contain test-transaction information (for example, script name, test step name, and virtual user ID).
 
-We will have a number of inputs for these labs. So make a text file on your laptop. With these placeholders
+Dynatrace can analyze incoming HTTP headers and extract such contextual information from the header values and tag the captured requests with request attributes. Request attributes enable you to filter your monitoring data based on defined tags.
 
-```
-Virtual Machine IP:
-Virtual Machine login:
-Virtual Machine password:
+You can use any (or multiple) HTTP headers or HTTP parameters to pass context information. The extraction rules can be configured via ```Settings --> Server-side service monitoring --> Request attributes```.
 
-Dyntrace URL: https://[YOUR TENANT].live.dynatrace.com 
-Dyntrace Token:
+The header ```x-dynatrace-test``` is used one or more key/value pairs for the header. Here are some examples:
 
-Jenkins URL:
-Sample Application URL:
-```
+| **Key**   | **Description**   |
+| --- | --- |
+| VU  | Virtual User ID of the unique user who sent the request.  |
+| SI  | Source ID identifies the product that triggered the request (JMeter, LoadRunner, Neotys, or other)  |
+| TSN  | Test Step Name is a logical test step within your load testing script (for example, Login or Add to cart.  |
+| LSN  | Load Script Name - name of the load testing script. This groups a set of test steps that make up a multi-step transaction (for example, an online purchase).  |
+| LTN  | The Load Test Name uniquely identifies a test execution (for example, 6h Load Test – June 25)  |
+| PC  | Page Context provides information about the document that is loaded in the currently processed page.  |
 
-**NOTE be sure there is NO slash as the end of the Dynatrace URL**
+## Exercise Steps
 
-## Connect to your VM
-
-The EC2 instance is provisioned with a SSH web client tool.  This will allow you to just open your browser to the IP provided for the lab.  The login page will look like this.
-
-<img src="images/shellinabox.png" width="300"/>
-
-Use the login credentials provided to login.  Save this information to your cheatsheet.
-
-## Install Dyntrace Agent
-
-1. To install Dynatrace OneAgent, first login into your Dynatrace tenant.  For example: ```https://<your tenant>.live.dynatrace.com```
-
-1. From the left side menu, navigate to ```deploy dynatrace```
-
-    <img src="images/dt-deploy.png" width="300"/>
-
-1. Choose ```start intallation``` button and then pick the ```Linux``` option
-
-    <img src="images/dt-agent.png" width="300"/>
-
-1. Copy and run the three commands to you VM
-
-    <img src="images/dt-agent-linux.png" width="300"/>
-
-1. From the left side menu, navigate to ```hosts```.  You should see your host, so click on it to view the details.
-
-    <img src="images/host.png" width="300"/>
-
-    Note that the properties and tag automatically came from EC2.
-
-    <img src="images/ec2.png" width="300"/>
-
-## Start the Demo Application
-
-1. Clone the hotday scripts
-    ```
-    cd ~
-    git clone https://github.com/dynatrace-neoload-perf-workshop-infra/hotday.git
-    ```
-
-1. Run the docker-compose script and verify it is running
+1. Review the simple shell script
 
     ```
-    # start up the application
-    cd ~/hotday/lab2
-    sudo docker-compose up -d
-
-    # verify running
-    sudo docker ps
+    cd ~/workshop/lab2
+    cat sendtraffic.sh
     ```
 
-1. View the demo application in a browser by navigating to
-
-    ```http://<your Public VM IP>```
-
-    You can you this command to get your URL:
-
-    ```echo "http://$(curl -s http://checkip.amazonaws.com)"```
-
-    Verify that you see version 1 for each services as shown here
-
-    <img src="images/backend-versions.png" width="300"/>
-
-    Save the URL to your cheatsheet.
-
-1. Navigate around the application as to make traffic for Dynatrace to pick up.  Be sure to visit, order, customer, and search functionality.
-
-1. Lets review what Dyntrace picked up automatically.  From the left side menu, navigate to "transactions and services". Notice how the service are hard to distinquish.
-
-    <img src="images/no-tags.png" width="300"/>
-
-## Add Tags
-
-Managing and organizing large monitoring environments is a real challenge. To effectively cope with this challenge, Dynatrace supports tags and metadata. Tags and metadata enable you to organize your monitored environments in a meaningful way. 
-
-We will show two ways to add tags: 1) environment variables and 2) auto-tagging rules 
-
-This exercise shows the first way of using an environment variable called ```DT_TAGS``` for the Docker container process. Dynatrace will automatically pick this [environment variable](https://www.dynatrace.com/support/help/how-to-use-dynatrace/tags-and-metadata/setup/define-tags-based-on-environment-variables/) and assign a tag.  
-
-1. Stop the running application
+    Notice how each request adds in ```x-dynatrace-test``` header, using several keys/pairs such as Test Step Name (TSN) and Load Test Name (LTN)
 
     ```
-    # stop up the application
-    cd ~/hotday/lab2
-    sudo docker-downcompose 
-
-    # verify it is no longer running
-    sudo docker ps
+    curl -s "$url/catalog/searchForm.html" -w "%{http\_code}" -H "x-dynatrace-test: LSN=$loadScriptName;LTN=$loadTestName;TSN=$testStepName;" -o /dev/nul
     ```
 
-1. Review how we are adding these in docker compose
+1. In Dynatrace on the left menu, navigate to  ```settings --> server-side monitoring --> request attributes```
+
+1. Click ```define a new request attribute```  button and type in the name LTN and leave the default values
+
+1. Configure the request attribute according to this picture:
+
+    <img src="images/request-attribute.png" >
+
+    Click add a new data source button and configure as shown below.
+
+    - ensure HTTP request header is selected
+    - Fill in the value x-dynatrace-test for parameter name
+    - Expand the Further restrict or process captured parameters (optional) section
+    - fill in the  Preprocess parameter by extracting substring value of LSN
+    - To verify, paste in this value and click the preview processed output button to verify.
+    - ```x-dynatrace-test: LTN=myLoadTest;TSN=myTestStepName;```
+
+    <img src="images/request-attribute-verify.png" >
+
+1. Save the request attribute rule.
+
+1. Now repeat the above steps to add a second request attribute for Load Test Name
+
+| **Request attributes Name**   | **Description**   | **Preprocessing parameter**   |
+| --- | --- | --- |
+| LTN  | Load Test Name  | LTN=  |
+| TSN  | Test Step Name  | TSN=  |
+
+1. At the end you should see.
+
+    <img src="images/request-attribute-list.png" >
+
+1. Run the load script for 120 seconds
+
     ```
-    cat docker-compose-with-tags.yaml
+    cd ~/workshop/lab2
+    ./sendtraffic.sh
     ```
 
-    Notice this section:
-    ```
-    environment:
-      DT_TAGS: "app=keptn-orders"
-    ```
+    The output will show the calls along with the HTTP status code. You should see the HTTP 200 code for each call.
 
-1. start up the application with the new environment variables added.
     ```
-    sudo docker-compose -f docker-compose-with-tags.yaml up -d
-
-    # verify running
-    sudo docker ps
+    Load Test Started. DURATION=6 URL=http://[Your IP] THINKTIME=5
+    x-dynatrace-test: LSN=order\_loadtest.sh;LTN=manual 2019-12-17\_14:16:58;
+    14:16:58
+    calling TSN=CatalogSearchLanding; 200
+    calling TSN=CatalogSearch; 200
+    calling TSN=CatalogItemView; 200
+    ...
     ```
 
-1. Navigate around the application as to make traffic for Dynatrace to pick up.  Be sure to visit, order, customer, and search functionality.
+1. Let&#39;s checkout Dynatrace and see what happened. First navigate to transactions and services and click on the catalog  On the catalog service, click on the dynamic requests 
 
-1. Lets review what Dyntrace picked up automatically.  From the left side menu, navigate to "transactions and services". 
+    <img src="images/dynamic-requests.png" >
 
-1. Click into one of the services and notices the tags for ```[Environment]app:keptn-orders```.  This was automatically added from an environment variable. 
+1. Now click on the request attributes button and review the requests with the Test Step Names (TSN) that are defined in the load test and match the rules we setup.
 
-    <img src="images/service-tag.png" width="500"/>
+    <img src="images/request-attribute-pages.png" >
 
-## Add Tag rule
+1. Click on one of the "Step names" and review the filtered chart results
 
-Lets now review a second way to add tags using auto-tagging rules.
+## Add Request Naming rules
 
-In dynamic or large environments, manual tagging can be impractical. In such cases, it’s recommended that you use [automated, rule-based tagging](https://www.dynatrace.com/support/help/shortlink/tagging#how-to-define-an-automatically-applied-tag). Automatically applied tags behave just like the manually-applied, except they’re applied automatically to new entities that match defined rules. Automatically applied tags can’t be removed manually from individual services, process groups, process group instances, applications, or hosts. Automatically applied tags are removed automatically once an entity no longer matches a defined rule.
+Within Dynatrace, you can use request naming rules to adjust how your requests are tracked and to define business transactions in your customer-facing workflow that are critical to the success of your digital business. With such end-to-end tracing, Dynatrace enables you to view and monitor important business transactions from end to end.
 
-This Exercise shows adding a rule to use the service detected name as the tag ```service:<service name>``` based on the ```service detected name```.
+For the demo catalog service, each request URL to view a catalog item has the format ```##.html``` where the number is the product number, so we are going to define a naming rule so that all of these requests are just called &#39;product detail&#39;.
 
-1. In Dynatrace on the left menu, navigate to ```settings --> tags --> Automatically applied tags```
+<img src="images/catalog-requests-before.png" >
 
-1. Click ```Create tag``` button and type in the name ```service``` and add a new rule with configuration as show below.
+## Exercise Steps
 
-    <img src="images/add-tag.png" width="500"/>
+1. To add a naming rule, click on the web request naming rule button
 
-1. Click the ```preview``` button to verify and be sure to save the rule 
+    <img src="images/edit-request-names.png" >
 
-    <img src="images/add-tag-preview.png" width="500"/>
+    NOTE: You can also get to the rules at the top of the services page and choosing the edit option as shown below.
 
-1. Navigate back on the ```transactions and services``` page, click into one of the services and notice the tags for ```[Environment]app:keptn-orders``` and the new tag ```service:<service name>``` created by the rule. 
+    <img src="images/edit-catalog.png" >
 
-    <img src="images/service-tag-more.png" width="500"/>
+1. Within in the service settings, navigate to Web request naming and click the Add rule 
 
-## Add Management Zone
+    img src="images/catalog-naming-rule.png" >
 
-Now that we have tags, we can use them in many ways such as charts, API calls as a feature called Management Zones.
+1. Configure the rule according to this picture:
 
-Management zones are a powerful information-partitioning mechanism that simultaneously promotes collaboration and the sharing of relevant team-specific data while still ensuring secure access controls.
+    -  Fill in the value "Item Detail" for naming pattern
+    -  Choose "URL Path" and "contains regex" with the value /\d+.html
+    -  To verify, click the preview processed output button to verify
 
-Each customizable management zone comprises a set of monitored entities in your environment, be it hosts that share a common purpose, a specific application, a staging environment, or services of a certain technology. Management zones may overlap, just as team responsibilities often overlap. Users may be granted access to entire environments, a specific management zone, or a subset of related management zones. 
+    <img src="images/request-naming-rule.png" >
 
-This exercise show how to add a zone that filters by the tag ```[Environment]app:keptn-orders```.
+1. Save the rule
 
-1. In Dynatrace on the left menu, navigate to ```settings --> preferences --> management zones```
+1. The change will not update past requests, so we need to load script again so that the rule gets applied
 
-1. Click ```add new management zone``` button and type in the name ```hotday``` and add a new rule with configuration as show below.
+    ```
+    cd ~/workshop/lab2
+    ./sendtraffic.sh
+    ```
 
-    <img src="images/mz.png" width="500"/>
+1. Now we can navigate back the "catalog" service and click the view dynamic requests
 
-1. Click the ```preview``` button to verify and be sure to save the rule 
+    <img src="images/dynamic-requests.png" >
 
-1. Navigate back on the ```transactions and services``` page, one can easy distinquish the services using the filter.
+1. Review the change. You may still see the old requests without the new name.
 
-    <img src="images/mz-filter.png" width="300"/>
+    <img src="images/catalog-requests-after.png" >
+
+    Click on the name to filter it with the time-series chart.
+
+    By using request attributes in combination with naming rules, you can capture even more context around your requests and use this additional detail to slice and dice your monitoring data.
+
+# Lab 2 Checklist
+
+In this lab, you should have completed the following:
+
+:white\_check\_mark: How to add x-dynatrace-test HTTP headers and see how they can be combined with Request Attributes rules
+
+:white\_check\_mark: How to use Request Attributes rules during analysis
+
+:white\_check\_mark: How to add Request Naming rules and see how they help during analysis
 
 
-[Next Lab](../lab2) :arrow_forward: 
+:arrow_backward: [Previous Lab](../lab1) | [Next Lab](../lab3) :arrow_forward: 

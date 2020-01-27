@@ -95,7 +95,7 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
     CONTAINER ID        IMAGE
     1eada6c20720        dtdemos/keptn-orders-order-service:1
     028b72624b59        dtdemos/keptn-orders-front-end:1
-    fc7c00ce7a17        dtdemos/keptn-orders-catalog-
+    fc7c00ce7a17        dtdemos/keptn-orders-catalog-:1
     63a3ef0e33aa        dtdemos/keptn-orders-customer-service:1
     ```
 
