@@ -112,10 +112,10 @@ A valid response will return an HTTP 200 with a JSON body containing these prope
     sudo docker run -p 8090:8080 -d \
         -e DYNATRACE_BASEURL=$DT_BASEURL \
         -e DYNATRACE_APITOKEN=$DT_TOKEN \
-        robjahn/pitometer-web-service
+        dtdemos/pitometer-web-service
 
     # verify container is running
-    sudo docker ps -f "ancestor=robjahn/pitometer-web-service"
+    sudo docker ps -f "ancestor=dtdemos/pitometer-web-service"
     ```
 
 1. review the quality gate script
