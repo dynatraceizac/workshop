@@ -7,7 +7,11 @@ In this lab, you will:
 1. [Add Tags](#Add-Tags)
 1. [Add Management Zone](#Add-Management-Zone)
 
-The picture below shows the setup for the lab environment and focus areas for this lab.
+The picture below shows the setup for the lab environment:
+1. Browser SSH client
+1. Dyntrace Agent
+1. Dyntrace SaaS server
+1. Docker-based demo application
 
 <img src="images/lab1-setup.png" width="700">
 
@@ -79,7 +83,6 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
 1. Run the docker-compose script to start up the application and verify it is running
 
     ```
-    cd ~/workshop/lab1
     sudo docker-compose up -d
     ```
 
@@ -98,9 +101,9 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
     fc7c00ce7a17        dtdemos/keptn-orders-catalog-:1
     63a3ef0e33aa        dtdemos/keptn-orders-customer-service:1
     ```
-1. We can also verify the containers show up in Dynatrace by navigating back to the Host view.
+1. We can also verify the containers show up in Dynatrace by navigating back to the Host view.  Notice the various Tomcat processes.
 
-    <img src="images/container-check.png" width="400">
+    <img src="images/container-check.png" width="700">
 
 1. Get the URL to the demo application by running this command:
 
@@ -117,7 +120,6 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
 1. Run a simple shell script to make some traffic on the site. This will loop for about 2 minutes sending requests to various pages.
 
     ```
-    cd ~/workshop/lab1
     ./sendtraffic.sh
     ```
 
@@ -133,13 +135,13 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
     ...
     ```
 
-1. Let's review what Dynatrace picked up automatically. From the left side menu, navigate to ";transactions and services"; and click on the ```order```  On the order service, click on the ```dynamic requests``` 
+1. Let's review what Dynatrace picked up automatically. From the left side menu, navigate to ```transactions and services``` and click on the ```order```  On the order service, click on the ```dynamic requests``` 
 
     <img src="images/dynamic-requests.png">
 
 1. Now click on the ```View dynamic requests```  button and review the top requests by URL.
 
-1. On the far right of the row for /line, click the ";…"; to get a menu
+1. On the far right of the row for /line, click the ```…``` to get a menu
 
     <img src="images/actions-menu.png">
 
@@ -188,7 +190,7 @@ This exercise shows the first way of using an environment variable called ```D
 
     ```
     environment:
-    DT_TAGS: ";app=keptn-orders"
+    DT_TAGS: "app=keptn-orders"
     ```
 
 1. start up the application with the new environment variables added.
@@ -212,7 +214,7 @@ Navigate to the application in the browser.  It may take about a minute, but ver
     ./sendtraffic.sh
     ```
 
-1. Let's review what Dynatrace picked up automatically. From the left side menu, navigate to ";transactions and services";.
+1. Let's review what Dynatrace picked up automatically. From the left side menu, navigate to ```transactions and services```.
 
 1. Click into one of the services and notices the tags for ```[Environment]app:keptn-orders```. This was automatically added from an environment variable.
 
@@ -237,11 +239,11 @@ This Exercise shows adding a rule to use the service detected name as the tag 
 
     <img src="images/add-tag.png">
 
-1. Click the ```preview``` button to verify and be sure to save the rule
+1. Click the ```preview``` button to verify.
 
     <img src="images/add-tag-preview.png">
 
-1. Click ```create rule``` button. Then ```Save```.
+1. Save the rule. Click ```create rule``` button. Then ```Save changes``` button.
 
     <img src="images/save-tag-rule.png">
 
@@ -271,9 +273,9 @@ This exercise shows how to add a zone that filters by the tag [Environment]app
 
 1. Select ```apply to underlying hosts of matching services``` check box.
 
-1. Click the ```preview``` button to verify and be sure to save the rule.
+1. Click the ```preview``` button to verify.
 
-1. Click ```Create rule``` then ```Save```
+1. Save the zone. Click ```create rule``` button. Then ```Save changes``` button.
 
 1. After navigating back on the ```transactions and services``` page, you can easy distinguish the services using the management zone filter
 
