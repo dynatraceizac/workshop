@@ -20,7 +20,7 @@ The workshop labs will all use an order processing application that has been des
 
 1. Working knowledge of Linux and Linux commands.
 
-1. Basic knowledge of Load Testing. A simple tutorial can be found [here])https://www.guru99.com/load-testing-tutorial.html)
+1. Basic knowledge of Load Testing. A simple tutorial can be found [here](https://www.guru99.com/load-testing-tutorial.html)
 
 1. Basic knowledge of Software Code Pipelines. A short overview can be found [here](https://semaphoreci.com/blog/cicd-pipeline)
 
