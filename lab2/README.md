@@ -156,6 +156,10 @@ For the demo catalog service, each request URL to view a catalog item has the fo
 
     By using request attributes in combination with naming rules, you can capture even more context around your requests and use this additional detail to slice and dice your monitoring data.
 
+1. Now we can use filters in Dynatrace to examine data.
+
+   <img src="images/filter-example.png" width="600">
+
 # Lab 2 Checklist
 
 In this lab, you should have completed the following:

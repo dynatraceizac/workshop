@@ -40,7 +40,7 @@ Some of the lab provide scripts require the Dynatrace URL and API.  To save you 
 
     ```
     cd ~/scripts
-    ./enter-script-inputs.sh
+    sudo ./enter-script-inputs.sh
     ```
 
 1. Enter in your Dynatrace tenant and token and choose to save.  Here is what it should look like.
@@ -68,7 +68,7 @@ We are going to review how to use the events API to push information-only ev
 1. Run the push event script with argument of mock deployment version #1
 
     ```
-    sudo ./pushevent.sh 1
+    ./pushevent.sh 1
     ```
 
     You should see output like this. NOTE: Those numbers at the end map to the matching Dynatrace entity IDs.
