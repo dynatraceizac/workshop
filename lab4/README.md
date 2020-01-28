@@ -45,7 +45,7 @@ The pipeline we have provided will deploy the application, execute tests, and pu
 
 <img src="images/jenkins-flow.png" >
 
-1. Navigate to the ```lab4``` section and click on the "pipeline" task
+1. Navigate to the ```lab3``` section and click on the "pipeline" task
 
     <img src="images/jenkins-job.png" >
 
