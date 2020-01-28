@@ -125,6 +125,8 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 1. From here click on the "Analyze failure rate degradation", then we will see the error details.
 
    <img src="images/error-details.png" >  
+   
+1. finally run one more build with the order service version "1"   
 
 # Lab 4 Checklist
 
