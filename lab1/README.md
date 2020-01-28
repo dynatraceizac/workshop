@@ -98,7 +98,7 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
     fc7c00ce7a17        dtdemos/keptn-orders-catalog-:1
     63a3ef0e33aa        dtdemos/keptn-orders-customer-service:1
     ```
-1. We can also verify the containers show up in Dynatrace.
+1. We can also verify the containers show up in Dynatrace by navigating back to the Host view.
 
     <img src="images/container-check.png" width="400">
 
