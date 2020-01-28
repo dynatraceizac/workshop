@@ -102,37 +102,37 @@ The picture below shows the setup for the lab environment.
 
 ## Review NeoLoad Results
 
-In Neoload web, goto the "tests" section and open the test we just started.
+1. In Neoload web, goto the "tests" section and open the test we just started.
 
-* The overview tab shows all the global statistics metrics.  Global statistics are the metrics sent to Dynatrace
-* The values tab shows statistics by type of NeoLoad entity (Transaction, Page, Request, Counter)
-* The events tab shows all the errors: Assertions errors, SLA, Monitoring alerts
+    * The overview tab shows all the global statistics metrics.  Global statistics are the metrics sent to Dynatrace
+    * The values tab shows statistics by type of NeoLoad entity (Transaction, Page, Request, Counter)
+    * The events tab shows all the errors: Assertions errors, SLA, Monitoring alerts
 
-**Error! Filename not specified.**
+    <img src="images/running-test.png" >
 
-2 . Create a custom dashboard
+1. Create a custom dashboard
 
-Neoload charts can show data from both test request and monitoring data. To make a chart
+    Neoload charts can show data from both test request and monitoring data. To make a chart
 
-* click on the "Dashboard" menu
-* Select the test from the dropdown
-* Click the "+ add" button on the top to add a new graph
-* In the data sources section, choose the "user path" metrics
-* In the "statistics" section drag and drop a metric such as these into the graph
-    * Hit/s
-    * Transaction/S of a specific transaction
-    * Response time
-    * Time to First bytes
+    * click on the "Dashboard" menu
+    * Select the test from the dropdown
+    * Click the "+ add" button on the top to add a new graph
+    * In the data sources section, choose the "user path" metrics
+    * In the "statistics" section drag and drop a metric such as these into the graph
+        * Hit/s
+        * Transaction/S of a specific transaction
+        * Response time
+        * Time to First bytes
 
-* The graph will look something like this
+    * The graph will look something like this
 
-    <img src="images/dashboard.png" >
+        <img src="images/dashboard.png" >
 
-You can also choose any infrastructure metrics collected by a NeoLoad integration or a core monitoring module of NeoLoad.
+    You can also choose any infrastructure metrics collected by a NeoLoad integration or a core monitoring module of NeoLoad.
 
-To do this
-* In the "data sources" section, choose the "monitors" option.
-* Expand the "External Data" section the find "Dynatrace" as shown below and just drag and drop one of the metrics to the graph
+    To do this
+    * In the "data sources" section, choose the "monitors" option.
+    * Expand the "External Data" section the find "Dynatrace" as shown below and just drag and drop one of the metrics to the graph
 
 ## Run Tests with SLAs
 
@@ -144,7 +144,7 @@ Continue to try these test scripts and exercises:
     * Once the Jenkins build is finished. In Dynatrace, Click on the test event added by NeoLoad on the services tagged ```service:catalog```
     * Click on the Neoload web url to look at the results in NeoLaod Web
     * Create a graph with the _number of process _utilized by the _catalog service_
-    *  What is the status of the SLA?
+    * What is the status of the SLA?
 
 1. End2End testing
 
@@ -156,9 +156,7 @@ Continue to try these test scripts and exercises:
 
 In this lab, you should have completed the following:
 
-:white_check_mark: Learned the NeoLoad Platform and reviewed tests within
-
-the NeoLoad SaaS Web UI
+:white_check_mark: Learned the NeoLoad Platform and reviewed tests within the NeoLoad SaaS Web UI
 
 :white_check_mark: Run NeoLoad tests using Jenkins
 
