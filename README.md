@@ -17,3 +17,7 @@ The workshop labs will all use an order processing application that has been des
 1. This workshop assumes that you are using a pre-built Amazon AMI image that has all the tools and scripts pre-loaded. For details on this image, check out [this repo](https://github.com/dynatrace-neoload-perf-workshop-infra/infra-tooling) that has the automation scripts to built it.
 
 2. This workshop assumes you will have a [Dynatrace SaaS tenant](https://www.dynatrace.com/trial/) and a [Neoload SaaS account and license](https://www.neotys.com/).
+
+3. Working knowledge of Linux and Linux commands.
+
+4. Familiar with github and Jankins.
