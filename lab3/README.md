@@ -101,6 +101,8 @@ We are going to review how to use the events API to push information-only ev
 
 1. Now try the comparison between builds.  Navigate back to the "transactions and services" menu and choose the "catalog service"  Notice how you have multiple deployments events.
 
+   <img src="images/events.png" >
+
 1. Now choose the "view dynamic requests" button to few a set of activity.  You can hover or click the small grey dot in the time line to view the event that was pushed.
 
     <img src="images/event-transactions.png" >
