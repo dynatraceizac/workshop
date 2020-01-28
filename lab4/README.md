@@ -126,7 +126,11 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 
    <img src="images/error-details.png" >  
    
-1. finally run one more build with the order service version "1"   
+1. finally run one more build with the order service version "1"
+
+    This will return the failure rate to zero and close the problem.
+    
+    <img src="images/close-problem.png" >
 
 # Lab 4 Checklist
 
