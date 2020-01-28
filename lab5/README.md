@@ -20,7 +20,7 @@ In this lab, you will:
 
 1. Activate your license in NeoLoad
 
-1. Click on the Account menu option
+1. Click on the ```resource``` menu option and then the ```subscription``` tab
 
     <img src="images/account.png" >
 

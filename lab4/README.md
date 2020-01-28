@@ -51,7 +51,7 @@ The pipeline we have provided will deploy the application, execute tests, and pu
 
 1. Choose the "build with parameters" and click the "build" button to run the pipeline as shown below and then review console log as it runs.
 
-    <img src="images/jenkins-gate-job.png" >
+    <img src="images/jenkins-pipeline-job.png" >
 
 1. Now go back to the "transaction and services" within Dynatrace and choose the order service.  Review newly created events.
 
@@ -136,11 +136,11 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 
 In this lab, you should have completed the following:
 
-:white\_check\_mark: Run an automated pipeline to execute tests with an automated service level validations
+:white_check_mark: Run an automated pipeline to execute tests with an automated service level validations
 
-:white\_check\_mark: How to use out of the box Dashboard and Charts to review test results
+:white_check_mark: How to use out of the box Dashboard and Charts to review test results
 
-:white\_check\_mark: Additional Dynatrace features to triage issues
+:white_check_mark: Additional Dynatrace features to triage issues
 
 <hr>
 
