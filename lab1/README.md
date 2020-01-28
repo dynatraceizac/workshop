@@ -74,7 +74,7 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
 
     The application will have 4 containers listening on these ports.
 
-    <img src="images/app-ports.png" width="400">>
+    <img src="images/app-ports.png" width="400">
 
 1. Run the docker-compose script to start up the application and verify it is running
 
@@ -100,7 +100,7 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
     ```
 1. We can also verify the containers show up in Dynatrace.
 
-    <img src="images/container-check.png" width="400">>
+    <img src="images/container-check.png" width="400">
 
 1. Get the URL to the demo application by running this command:
 
