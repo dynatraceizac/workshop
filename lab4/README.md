@@ -89,6 +89,10 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 
 Show how can see the failure and drill into analysis and compare build 1 to 2
 
+1. First we can examine the error rates.
+
+   <img src="images/order-errors.png" >
+
 ## Triage performance issues
 
 Show how can see the look at the hot spots and exceptions from build 2
