@@ -85,9 +85,7 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 
 1. Re-Run the pipeline with the order service version "2" and review console log as it runs.   To see how the automated validation stopped the build.
 
-## Dashboard and Charts
-
-Show how can see the failure and drill into analysis and compare build 1 to 2
+## Dashboards, Charts and Problems
 
 1. First we can examine the error rates.
 
@@ -97,16 +95,36 @@ Show how can see the failure and drill into analysis and compare build 1 to 2
 
    <img src="images/anomoly-adjustment.png" >
   
-  1. We will need to change the setting
-  2. Turn off "global settings"
-  3. change "Detect increase failure rate" to use "fixed thresholds"
-  4. change "Alert" to use 3%
-  
-   
+  We will need to change these settings
+  * Turn off "global settings"
+  * change "Detect increase failure rate" to use "fixed thresholds"
+  * change "Alert" to use 3%
+
+1. Run another pipline build with the order service version "2".
+
+   After a few moments, we should see a problem card in Dynatrace.
+
+   <img src="images/problem-card.png" >   
+
+   Now we can also dive into the Problem details.
+
+   <img src="images/problem-details.png" >
 
 ## Triage performance issues
 
-Show how can see the look at the hot spots and exceptions from build 2
+Now we can continue and use Dynatrace to analyze the errors.
+
+Use the problem card to drill down into the details, then we will click on the errors on the service.
+
+   <img src="images/failure-rate.png" >
+
+We can then examine the Failure Rates over time,
+
+   <img src="images/failure-chart.png" >
+
+From here click on the "Analyze failure rate degradation", then we will see the error details.
+
+   <img src="images/error-details.png" >  
 
 # Lab 4 Checklist
 
