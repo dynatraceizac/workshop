@@ -100,7 +100,7 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
     ```
 1. We can also verify the containers show up in Dynatrace.
 
-    <img src="images/Screen Shot 2020-01-28 at 11.31.20 AM.png" width="400">>
+    <img src="images/container-check.png" width="400">>
 
 1. Get the URL to the demo application by running this command:
 
