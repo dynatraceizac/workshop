@@ -40,7 +40,7 @@ Some of the lab provide scripts require the Dynatrace URL and API.  To save you 
 
     ```
     cd ~/scripts
-    ./enter-script-inputs.sh
+    sudo ./enter-script-inputs.sh
     ```
 
 1. Enter in your Dynatrace tenant and token and choose to save.  Here is what it should look like.
