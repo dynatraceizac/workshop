@@ -92,6 +92,17 @@ Show how can see the failure and drill into analysis and compare build 1 to 2
 1. First we can examine the error rates.
 
    <img src="images/order-errors.png" >
+ 
+1. Now let's adjust the anomaly detection for the order service. 
+
+   <img src="images/anomoly-adjustment.png" >
+  
+  2. We will need to change the setting
+  2. Turn off "global settings"
+  2. change "Detect increase failure rate" to use "fixed thresholds"
+  2. change "Alert" to use 3%
+  
+   
 
 ## Triage performance issues
 
