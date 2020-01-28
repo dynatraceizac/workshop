@@ -111,13 +111,13 @@ Within Dynatrace, you can use request naming rules to adjust how your requests a
 
 For the demo catalog service, each request URL to view a catalog item has the format ```##.html``` where the number is the product number, so we are going to define a naming rule so that all of these requests are just called ```product detail```.
 
-<img src="images/catalog-requests-before.png"  width="300">
+<img src="images/catalog-requests-before.png"  width="600">
 
 ## Exercise Steps
 
 1. To add a naming rule, click on the web request naming rule button
 
-    <img src="images/edit-request-names.png"  width="300">
+    <img src="images/edit-request-names.png"  width="600">
 
     NOTE: You can also get to the rules at the top of the services page and choosing the edit option as shown below.
 
@@ -150,7 +150,7 @@ For the demo catalog service, each request URL to view a catalog item has the fo
 
 1. Review the change. You may still see the old requests without the new name.
 
-    <img src="images/catalog-requests-after.png" width="300">
+    <img src="images/catalog-requests-after.png" width="600">
 
     Click on the name to filter it with the time-series chart.
 
@@ -167,4 +167,5 @@ In this lab, you should have completed the following:
 :white\_check\_mark: How to add Request Naming rules and see how they help during analysis
 
 <hr>
+
 :arrow_backward: [Previous Lab](../lab1) | [Next Lab](../lab3) :arrow_forward: 
