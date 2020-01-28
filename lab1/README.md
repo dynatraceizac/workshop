@@ -290,5 +290,6 @@ In this lab, you should have completed the following:
 
 :white_check_mark: See how Dynatrace automatically monitors the application and where tags show up 
 
+<hr>
 
 [Next Lab](../lab2) :arrow_forward: 
