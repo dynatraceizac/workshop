@@ -95,10 +95,10 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 
    <img src="images/anomoly-adjustment.png" >
   
-  We will need to change these settings
-  * Turn off "global settings"
-  * change "Detect increase failure rate" to use "fixed thresholds"
-  * change "Alert" to use 3%
+1.  We will need to change these settings
+    * Turn off "global settings"
+    * change "Detect increase failure rate" to use "fixed thresholds"
+    * change "Alert" to use 3%
 
 1. Run another pipline build with the order service version "2".
 
@@ -112,17 +112,17 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 
 ## Triage performance issues
 
-Now we can continue and use Dynatrace to analyze the errors.
+1. Now we can continue and use Dynatrace to analyze the errors.
 
-Use the problem card to drill down into the details, then we will click on the errors on the service.
+    Use the problem card to drill down into the details, then we will click on the errors on the service.
 
    <img src="images/failure-rate.png" >
 
-We can then examine the Failure Rates over time,
+1. We can then examine the Failure Rates over time,
 
    <img src="images/failure-chart.png" >
 
-From here click on the "Analyze failure rate degradation", then we will see the error details.
+1. From here click on the "Analyze failure rate degradation", then we will see the error details.
 
    <img src="images/error-details.png" >  
 
