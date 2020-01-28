@@ -70,7 +70,7 @@ The pipeline we have provided will deploy the application, execute tests, and pu
 
 Here is a diagram of the additional validation step and interactions with Dynatrace.
 
-<img src="images/jenkins-job.png" >
+<img src="images/jenkins-flow-gate.png" >
 
 1. The Jenkinsfile will call the validate-service-levels.sh that we manually ran in the previous lab.
 
