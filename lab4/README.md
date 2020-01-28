@@ -97,10 +97,10 @@ Show how can see the failure and drill into analysis and compare build 1 to 2
 
    <img src="images/anomoly-adjustment.png" >
   
-  2. We will need to change the setting
+  1. We will need to change the setting
   2. Turn off "global settings"
-  2. change "Detect increase failure rate" to use "fixed thresholds"
-  2. change "Alert" to use 3%
+  3. change "Detect increase failure rate" to use "fixed thresholds"
+  4. change "Alert" to use 3%
   
    
 
