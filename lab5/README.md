@@ -22,10 +22,6 @@ In this lab, you will:
 
 1. Click on the ```resource``` menu option and then the ```subscription``` tab
 
-    <img src="images/account.png" >
-
-1. Click on the subscription tab
-
     <img src="images/subscription.png" >
 
 1. Click on the button Install button.  Use the file chooser to pick the license file you downloaded earlier.  Once uploaded, you should a valid license as shown here.
