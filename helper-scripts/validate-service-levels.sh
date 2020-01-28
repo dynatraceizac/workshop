@@ -87,9 +87,8 @@ execute_query() {
 
 }
 
-
 # validate have Dynatrace credentials
-CREDS=/home/$(whoami)/scripts/script-inputs.json
+CREDS=$(cat config.json | jq -r '.credsfile')
 
 if ! [ -f "$CREDS" ]; then
   echo "Aborting: Missing $CREDS file"

@@ -10,7 +10,7 @@ else
   version=$1 
 fi
 
-CREDS=/home/$(whoami)/scripts/script-inputs.json
+CREDS=$(cat ../helper-scripts/config.json | jq -r '.credsfile')
 
 if ! [ -f "$CREDS" ]; then
   echo "Aborting: Missing $CREDS file"
