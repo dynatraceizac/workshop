@@ -45,7 +45,7 @@ The pipeline we have provided will deploy the application, execute tests, and pu
 
 <img src="images/jenkins-flow.png" >
 
-1. Navigate to the ```lab4``` section and click on the "pipeline" task
+1. Navigate to the ```lab3``` section and click on the "pipeline" task
 
     <img src="images/jenkins-job.png" >
 
@@ -85,13 +85,52 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 
 1. Re-Run the pipeline with the order service version "2" and review console log as it runs.   To see how the automated validation stopped the build.
 
-## Dashboard and Charts
+## Dashboards, Charts and Problems
 
-Show how can see the failure and drill into analysis and compare build 1 to 2
+1. First we can examine the error rates.
+
+   <img src="images/order-errors.png" >
+ 
+1. Now let's adjust the anomaly detection for the order service. 
+
+   <img src="images/anomoly-adjustment.png" >
+  
+1.  We will need to change these settings
+    * Turn off "global settings"
+    * change "Detect increase failure rate" to use "fixed thresholds"
+    * change "Alert" to use 3%
+
+1. Run another pipline build with the order service version "2".
+
+   After a few moments, we should see a problem card in Dynatrace.
+
+   <img src="images/problem-card.png" >   
+
+   Now we can also dive into the Problem details.
+
+   <img src="images/problem-details.png" >
 
 ## Triage performance issues
 
-Show how can see the look at the hot spots and exceptions from build 2
+1. Now we can continue and use Dynatrace to analyze the errors.
+
+    Use the problem card to drill down into the details, then we will click on the errors on the service.
+
+   <img src="images/failure-rate.png" >
+
+1. We can then examine the Failure Rates over time,
+
+   <img src="images/failure-chart.png" >
+
+1. From here click on the "Analyze failure rate degradation", then we will see the error details.
+
+   <img src="images/error-details.png" >  
+   
+1. finally run one more build with the order service version "1"
+
+    This will return the failure rate to zero and close the problem.
+    
+    <img src="images/close-problem.png" >
 
 # Lab 4 Checklist
 

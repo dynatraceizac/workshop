@@ -16,8 +16,12 @@ The workshop labs will all use an order processing application that has been des
 
 1. This workshop assumes that you are using a pre-built Amazon AMI image that has all the tools and scripts pre-loaded. For details on this image, check out [this repo](https://github.com/dynatrace-neoload-perf-workshop-infra/infra-tooling) that has the automation scripts to built it.
 
-2. This workshop assumes you will have a [Dynatrace SaaS tenant](https://www.dynatrace.com/trial/) and a [Neoload SaaS account and license](https://www.neotys.com/).
+1. This workshop assumes you will have a [Dynatrace SaaS tenant](https://www.dynatrace.com/trial/) and a [Neoload SaaS account and license](https://www.neotys.com/).
 
-3. Working knowledge of Linux and Linux commands.
+1. Working knowledge of Linux and Linux commands.
 
-4. Familiar with github and Jankins.
+1. Basic knowledge of Load Testing. A simple tutorial can be found [here])https://www.guru99.com/load-testing-tutorial.html)
+
+1. Basic knowledge of Software Code Pipelines. A short overview can be found [here](https://semaphoreci.com/blog/cicd-pipeline)
+
+1. Basic knowledge of Docker. A short overview can be found [here](https://itnext.io/docker-101-fundamentals-the-dockerfile-b33b59d0f14b)
