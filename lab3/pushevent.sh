@@ -10,7 +10,8 @@ else
   version=$1 
 fi
 
-CREDS=$(cat ../helper-scripts/config.json | jq -r '.credsfile')
+#CREDS=$(cat ../helper-scripts/config.json | jq -r '.credsfile')
+CREDS=/home/dtu_training/scripts/script-inputs.json
 
 if ! [ -f "$CREDS" ]; then
   echo "Aborting: Missing $CREDS file"
