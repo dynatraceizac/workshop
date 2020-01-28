@@ -88,7 +88,8 @@ execute_query() {
 }
 
 # validate have Dynatrace credentials
-CREDS=$(cat config.json | jq -r '.credsfile')
+#CREDS=$(cat config.json | jq -r '.credsfile')
+CREDS=/home/dtu_training/scripts/script-inputs.json
 
 if ! [ -f "$CREDS" ]; then
   echo "Aborting: Missing $CREDS file"
