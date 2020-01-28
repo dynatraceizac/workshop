@@ -1,150 +1,108 @@
-# Lab 3
+# Lab 4 Overview
 
-In this lab, learn how to run automated performance tests within a pipeline and add in 
-automated quality gates that ensure Service Level Objectives (SLO) using Service Level Indicators (SLI).
+Learn how to run automated performance tests within a pipeline and add in a step that validates a Service Level automatically.
+
+In this lab, you will:
+
+1. [Jenkins server setup](#Jenkins-server-setup)
+1. [Run the pipeline](#Run-the-pipeline)
+1. [Run the pipeline with Service Level Validation](#Run-the-pipeline-with-Service-Level-Validation)
+1. [Dashboard and Charts](#Dashboard-and-Charts)
+1. [Triage performance issues](#Triage-performance-issues)
 
 The picture below shows what we will complete in this lab.
 
-<img src="images/lab4.png" width="600"/>
+<img src="images/lab4.png" >
 
-Referring to the diagram above, learn how to:
-1. Review Jenkins setup
-2. Review and run pipeline files and scripts
-3. Quality Gate web service running as a Docker container
+## Jenkins server setup
 
-# Exercises
+The lab has a script that will install Jenkins and configure it with the plugin, jobs, and global variables that the jobs expect. To install Jenkins, just run these commands.
 
-1. [Configure and review Jenkins server](#Configure-and-review-Jenkins-server)
-1. [Run the pipeline](#Run-the-pipeline)
-1. [Dashboard and Charts](#Dashboard-and-Charts)
-1. [Add Quality Gate](#Add-Quality-Gate)
-1. [Run the pipeline with Quality Gate](#Run-the-pipeline-with-Quality-Gate)
+```
+cd ~/scripts
+sudo ./deploy-jenkins.sh
+```
 
-## Configure and review Jenkins server
+This process will take about 2 minutes and at the end it will display the URL to Jenkins
 
-We have installed Jenkins on the VM, but you need to complete the setup of it before we can use it.
+```
+=========================================
+Running start-jenkins.sh...
+Ready!!
+=========================================
 
-1. Run this command to get your URL.  Save it to your cheatsheet.
+Jenkins Server
+http://x.x.x.x:8080
+```
+
+Now open Jenkins in a browser and login with the credentials provided
+
+<img src="images/jenkins-login.png"  width="400">
+
+## Run the pipeline
+
+The pipeline we have provided will deploy the application, execute tests, and push Dynatrace deployment and test events. Here is a diagram of the pipeline steps and interactions with Dynatrace.
+
+<img src="images/jenkins-flow.png" >
+
+1. Navigate to the ```lab4``` section and click on the "pipeline" task
+
+    <img src="images/jenkins-job.png" >
+
+1. Choose the "build with parameters" and click the "build" button to run the pipeline as shown below and then review console log as it runs.
+
+    <img src="images/jenkins-gate-job.png" >
+
+1. Now go back to the "transaction and services" within Dynatrace and choose the order service.  Review newly created events.
+
+1. For the same order service, click on the "view Dynamic requests" and see how the request attributes for the Load Test Name (LTN) was filled in
+
+1. Re-Run the pipeline with the order service version "2" and review console log as it runs.
+
+1. While the job is running, lets review the Jenkinsfile to see the details for the pipeline.
 
     ```
-    echo "http://$(curl -s http://checkip.amazonaws.com):8080"
-    ```
-
-1. Navigate to the URL, and login to jenkins with the credentials provided.
-
-1. Goto 'manage jenkins --> Configure System' menu
-
-1. Navigate to the 'Global properties' section and adjust these values
-
-    * DT_URL = https://[YOUR TENANT].live.dynatrace.com
-    * DT_TOKEN = [YOUR DYNATRACE API TOKEN]
-
-1. Click the ```Save``` button on the bottom of the page.
-
-## Review Jenkinsfiles
-
-Here is a diagram of the pipeline steps and interactions with Dynatrace.
-
-<img src="images/jenkins-flow.png"/>
-
-1. Review Jenkinsfiles
-
-    ```
-    cd ~/hotday/lab4
+    cd ~/workshop/lab4
     cat Jenkinsfile
     ```
 
-1. Run the pipeline and review console log as it runs. This will deploy app, execute tests, push events
+## Run the pipeline with Service Level Validation
 
-    <img src="images/build.png"/>
+Here is a diagram of the additional validation step and interactions with Dynatrace.
 
-## Dashboard and Charts
+<img src="images/jenkins-job.png" >
 
-Here we will review the automated Dynatrace events, the autoamated transaction naming and ways to review the results.
-
-Run another test for a problem build.
-
-## Add Quality Gate
-
-Automated performance quality gates aim to eliminate the reliance on manual performance and architecture quality reviews following a deployment. Using a “Performance Specification” (PerfSpec) file, which defines performance and architecture metrics to query during pipeline execution, allows the collection and evaluation to be automated. Having such a PerfSpec file that is version controlled next to your source code follows the “everything-as-code” and GitOps approach
-
-In this lab, we will use a [Microservice web application](https://github.com/dt-demos/pitometer-web-service) that provides the processing logic of a passed in "perfspec" and start/end time frame. This service can be used as a software quality gate within our Jenkins pipelines.
-
-This web service runs as a Docker container listening on port 9080.
-
-### Request 
-
-POST request to https://[baseurl]:8090/api/pitometer
-JSON Body Structure
-* timeStart - start time in UTC unix seconds format used for the query
-* timeEnd - end time in UTC unix seconds format used for the query
-* perfSpec - a JSON structure containing the performance signature
-* spec_version - string property with pitometer version. Use 1.0
-* indicator - array of each indicator objects
-* objectives - object with pass and warning properties
-
-### Response
-A valid response will return an HTTP 200 with a JSON body containing these properties:
-* totalScore - numeric property with the sum of the passsing indicator metricScores
-* objectives - object with pass and warning properties passed in from the request
-* indicatorResults - array of each indicator and their specific scores and values
-* result - string property with value of 'pass', 'warn' or 'warning'
-
-### Exercise Steps
-
-1. review the perfspec file we will use
+1. The Jenkinsfile will call the validate-service-levels.sh that we manually ran in the previous lab.
 
     ```
-    cd ~/hotday/lab4/scripts
-    cat perfspec.json
-    ```
-
-1. start the quality gate service
-
-    ```
-    # adjust this value
-    export DT_BASEURL=https://[YOUR TENANT].live.dynatrace.com
-
-     # adjust this value
-    export DT_TOKEN=[YOUR DYNATRACE API TOKEN]
-
-    # run this full command
-    sudo docker run -p 8090:8080 -d \
-        -e DYNATRACE_BASEURL=$DT_BASEURL \
-        -e DYNATRACE_APITOKEN=$DT_TOKEN \
-        dtdemos/pitometer-web-service
-
-    # verify container is running
-    sudo docker ps -f "ancestor=dtdemos/pitometer-web-service"
-    ```
-
-1. review the quality gate script
-
-    ```
-    cat qualitygate.sh
-    ```
-
-1. run the quality gate script and review the output
-
-    ```
-    ./qualitygate.sh
-    ```
-
-## Run the pipeline with Quality Gate
-
-Here is a diagram of the additonal quality gate pipeline step and interactions with Dynatrace.
-
-<img src="images/jenkins-flow-gate.png"/>
-
-1. Review Jenkinsfile with the quality gate step added.
-
-    ```
-    cd ~/hotday/lab4
+    cd ~/workshop/lab4
     cat Jenkinsfile.withgate
     ```
 
-1. Run the pipeline and review console log as it runs. This will deploy app, execute tests, push events
+1. Run the pipeline and review console log as it runs. This will deploy app, execute tests, and push events.  This time notice, new service level parameters.
 
-1. Run another test for a problem build.
+    <img src="images/jenkins-gate-job.png" >
+
+1. Re-Run the pipeline with the order service version "2" and review console log as it runs.   To see how the automated validation stopped the build.
+
+## Dashboard and Charts
+
+Show how can see the failure and drill into analysis and compare build 1 to 2
+
+## Triage performance issues
+
+Show how can see the look at the hot spots and exceptions from build 2
+
+# Lab 4 Checklist
+
+In this lab, you should have completed the following:
+
+:white\_check\_mark: Run an automated pipeline to execute tests with an automated service level validations
+
+:white\_check\_mark: How to use out of the box Dashboard and Charts to review test results
+
+:white\_check\_mark: Additional Dynatrace features to triage issues
+
+<hr>
 
 :arrow_backward: [Previous Lab](../lab3) | [Next Lab](../lab5) :arrow_forward: 
