@@ -56,7 +56,7 @@ dtu_training@ip-10-0-0-54:~$ sudo ls
 
 ## Start the Demo Application
 
-The demo application runs using Docker Compose.  Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application's services. See the Application readme for more details.
+The demo application runs using Docker Compose.  Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application's services. See the [Application readme](../APPLICATION.md) for more details.
 
 1. Ensure you have the latest workshop scripts by doing a git pull
 
