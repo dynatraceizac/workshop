@@ -87,6 +87,12 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 
 ## Dashboards, Charts and Problems
 
+  [Problem Detection and Analysis](https://www.dynatrace.com/support/help/how-to-use-dynatrace/problem-detection-and-analysis/)
+  
+  [Root Cause Analysis](https://www.dynatrace.com/support/help/how-to-use-dynatrace/problem-detection-and-analysis/problem-analysis/root-cause-analysis/)
+  
+  [Dashboards and Charts](https://www.dynatrace.com/support/help/how-to-use-dynatrace/dashboards-and-charts/)
+
 1. First we can examine the error rates.
 
    <img src="images/order-errors.png" >
@@ -132,6 +138,50 @@ Here is a diagram of the additional validation step and interactions with Dynatr
     
     <img src="images/close-problem.png" >
 
+## Dashboards
+
+[Create Dashboard](https://www.dynatrace.com/support/help/how-to-use-dynatrace/dashboards-and-charts/dashboards/create-dashboards/)
+
+First we need to create a Dashbaord with a few tiles.
+
+1. Choose "Dahboards" from the menu.
+
+1. Then select "create dashboard"
+    <img src="images/create-dashboard.png" >
+1. Give the Dashbaord a name and click "Create"
+    <img src="images/dashboard-name.png" >
+1. Now we can add widgets to the dashboard.
+    <img src="images/add-widgets.png" >
+
+Dynatrace makes it easy to create your own fully customizable dashboards. You can easily create, modify, delete, and switch between dashboards.
+
+## Custome charts
+
+[Create custom charts](https://www.dynatrace.com/support/help/how-to-use-dynatrace/dashboards-and-charts/custom-charts-and-tiles/create-custom-charts/)
+
+Custom charts enable you to analyze any combination of monitoring metrics directly on your dashboards.
+
+We will create a custom chart by slecting the custom chart tile.
+
+   <img src="images/create-chart.png" width=400 height=300 >
+
+1. click on the chart tile
+
+1. Now you can see the Metric picker.
+1. select "Service", then "Failure Rate (any errors)"
+
+    <img src="images/metric-picker.png" width=400 height=300 >
+
+1. Now you can adjust the chart. I chose a bar chart, then slect "update Dashboard tile"
+
+The Result is a chart tile on the dashboard which will allow you to see the failure rates over time and then drill into the failure rates from the dashboard.
+
+   <img src="images/chart-tile.png" >
+
+Additional details for charts can be found [here](https://www.dynatrace.com/support/help/how-to-use-dynatrace/dashboards-and-charts/custom-charts-and-tiles/use-filtering-to-create-sophisticated-charts/).
+
+Take some time to look through additional tiles.
+
 # Lab 4 Checklist
 
 In this lab, you should have completed the following:
@@ -141,6 +191,14 @@ In this lab, you should have completed the following:
 :white_check_mark: How to use out of the box Dashboard and Charts to review test results
 
 :white_check_mark: Additional Dynatrace features to triage issues
+
+# Reference
+
+  [Problem Detection and Analysis](https://www.dynatrace.com/support/help/how-to-use-dynatrace/problem-detection-and-analysis/)
+  
+  [Root Cause Analysis](https://www.dynatrace.com/support/help/how-to-use-dynatrace/problem-detection-and-analysis/problem-analysis/root-cause-analysis/)
+  
+  [Dashboards and Charts](https://www.dynatrace.com/support/help/how-to-use-dynatrace/dashboards-and-charts/)
 
 <hr>
 
