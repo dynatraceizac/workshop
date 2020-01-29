@@ -28,7 +28,7 @@ curl --request GET \
 
 1. To add a new API token, in Dynatrace in the left menu navigate to ```settings --> integration --> Dynatrace API```
 
-1. Click the ```generate token``` button and enter the name ```hotday``` and enable the``` read &amp; write configuration``` settings as shown below.
+1. Click the ```generate token``` button and enter the name ```hotday``` and enable the permissions as shown below.
 
     <img src="images/add-token.png" >
 
@@ -43,22 +43,30 @@ Some of the lab provide scripts require the Dynatrace URL and API.  To save you 
     sudo ./enter-script-inputs.sh
     ```
 
-1. Enter in your Dynatrace tenant and token and choose to save.  Here is what it should look like.
+1. Enter in your Dynatrace tenant, Dynatrace API token, and Neoload API Token and choose to save.  Here is what it should look like.
 
-    <img src="images/enter-inputs.png" >
+    ```
+    ===================================================================
+    Please enter script input values
+    ===================================================================
+    Dynatrace Tenant: XXX of XXX.sprint.dynatracelabs.com
+    Dynatrace API Token
+    NeoLoad Web API Key
+    ===================================================================
+    Please confirm all are correct:
+    ...
+    ```
 
 ## Call Events API
 
-We are going to review how to use the events API to push information-only events to the monitored entities in our tests. There are several event types, and here is how a CUSTOM\_DEPLOYMENT looks like in Dynatrace.
+We are going to review how to use the events API to push information-only events to the monitored entities in our tests. There are several event types, and here is how a ```CUSTOM_DEPLOYMENT``` looks like in Dynatrace.
 
 <img src="images/event.png" >
 
 
 ## Exercise Steps
 
-1. Review the push event script and notice the ```tagRule```. This script will send a CUSTOM\_DEPLOYMENT event to all the services with the ENVIRONMENT tag ``` app:keptn-orders```.
-
-    Make sure the CRED is set to ```/home/dtu_training/scripts/scripts-inputs.json```
+1. Review the push event script and notice the ```tagRule```. This script will send a ```CUSTOM_DEPLOYMENT``` event to all the services with the ENVIRONMENT tag ``` app:keptn-orders```.
 
     ```
     cd ~/workshop/lab3
@@ -78,8 +86,8 @@ We are going to review how to use the events API to push information-only ev
     {"storedEventIds":[-6767884103997654659,-8278467612792737421,
     ...
     ...
-    ,"3582171445072147045\_1576
-    726279528","8471371692288947486\_1576726279528"],"storedCorrelationIds":[]}
+    ,"3582171445072147045_1576
+    726279528","8471371692288947486_1576726279528"],"storedCorrelationIds":[]}
     ```
 
 1. Review the new event in Dynatrace, by navigating to any of the services. The event table should look like this.
@@ -103,7 +111,7 @@ We are going to review how to use the events API to push information-only ev
 
    <img src="images/events.png" >
 
-1. Now choose the "view dynamic requests" button to few a set of activity.  You can hover or click the small grey dot in the time line to view the event that was pushed.
+1. Now choose the ```view dynamic requests``` button to few a set of activity.  You can hover or click the small grey dot in the time line to view the event that was pushed.
 
     <img src="images/event-transactions.png" >
 
@@ -113,15 +121,15 @@ We are going to review how to use the events API to push information-only ev
 
     <img src="images/compare-timeframe.png" >
 
-    We will use the time picker to select a "custom time frame".  We can also use the time shifting options is the graphs.
+    We will use the time picker to select a ```custom time frame```.  We can also use the time shifting options is the graphs.
 
     Once we have two time frames selected with transactions, we can compare the results.
 
     <img src="images/compare.png" >
 
-    Now select "Compare response time hotspots".
+    Now select ```Compare response time hotspots```.
 
-    This allows us to analyze the "Top findings" and "view method hotspots"
+    This allows us to analyze the ```Top findings``` and ```view method hotspots```
 
     <img src="images/hotspot.png" >
 
@@ -139,19 +147,19 @@ Let's just show how to call it. Later, you can read more in this blog and th
 
 ## Exercise Steps
 
-1. In Dynatrace, navigate to the environment API page from the top right "person" icon
+1. In Dynatrace, navigate to the environment API page from the top right ```person``` icon
 
     <img src="images/config-menu.png" >
 
-1. On the API web page, pick the 'environment v2' API from the drop down
+1. On the API web page, pick the ```environment v2``` API from the drop down
 
     <img src="images/config-menu-options.png" >
 
-1. Pick the 'Authorize' button, scroll to find the 'DataExport section', paste in your API Token, and pick 'Authorize' button
+1. Pick the 'Authorize' button, scroll to find the ```DataExport section```, paste in your API Token, and pick 'Authorize' button
 
     <img src="images/api-authorize.png" >
 
-1. Let's first review the metrics available using the 'GET Metrics' endpoint. This endpoint lists all metric definitions, with the parameters of each metric.
+1. Let's first review the metrics available using the ```GET Metrics``` endpoint. This endpoint lists all metric definitions, with the parameters of each metric.
 
     - click the Try it button
     - Below the ```Clear``` button, pick the Response content type of ```text/csv```
@@ -212,17 +220,17 @@ Verify that no containers are running
 
 In this lab, you should have completed the following:
 
-:white\_check\_mark: How to create a Dynatrace API Token
+:white_check_mark: How to create a Dynatrace API Token
 
-:white\_check\_mark: Learn the various Dynatrace Events and how to create an event using the API
+:white_check_mark: Learn the various Dynatrace Events and how to create an event using the API
 
-:white\_check\_mark: Basic comparison feature in Dynatrace
+:white_check_mark: Basic comparison feature in Dynatrace
 
-:white\_check\_mark: How to access the API Web UI interface
+:white_check_mark: How to access the API Web UI interface
 
-:white\_check\_mark: Learn about the Metrics v2 API and how to query metrics using the API
+:white_check_mark: Learn about the Metrics v2 API and how to query metrics using the API
 
-:white\_check\_mark: Sample app is stopped
+:white_check_mark: Sample app is stopped
 
 <hr>
 

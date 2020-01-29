@@ -1,5 +1,7 @@
 # Lab 2 Overview
 
+[Dynatrace and Load Testing Tools Integration](https://www.dynatrace.com/support/help/setup-and-configuration/integrations/third-party-integrations/test-automation-frameworks/dynatrace-and-load-testing-tools-integration/)
+
 Learn how to use Dynatrace features that support Performance testing for each phase: scripting, analysis, and reporting.  We will use the same demo application from the previous lab and use a simple Unix shell script to automate load.
 
 <img src="images/process.png" >
@@ -41,42 +43,50 @@ The header ```x-dynatrace-test``` is used one or more key/value pairs for th
     Notice how each request adds in ```x-dynatrace-test``` header, using several keys/pairs such as Test Step Name (TSN) and Load Test Name (LTN)
 
     ```
-    curl -s "$url/catalog/searchForm.html" -w "%{http\_code}" -H "x-dynatrace-test: LSN=$loadScriptName;LTN=$loadTestName;TSN=$testStepName;" -o /dev/nul
+    curl -s "$url/catalog/searchForm.html" -w "%{http_code}" -H "x-dynatrace-test: LSN=$loadScriptName;LTN=$loadTestName;TSN=$testStepName;" -o /dev/nul
     ```
 
 1. In Dynatrace on the left menu, navigate to  ```settings --> server-side monitoring --> request attributes```
 
-1. Click ```define a new request attribute```  button and type in the name LTN and leave the default values
+1. Click ```define a new request attribute``` button 
 
-1. Configure the request attribute according to this picture:
+1. For the request attribute name use: ```TSN```
 
-    <img src="images/request-attribute.png" >
+1. Leave other values the default. Click ```Add new data source``` button and configure as shown below.
+  
+    - Request attribute source = ```HTTP request header```
+    - Specify where the attribute is captured and then stored = ```Capture on server side```
+    - Parameter name = ```x-dynatrace-test```
+    - Expand the ```Further restrict or process captured parameters (optional)``` section
+    - fill in the ```Preprocess parameter by extracting substring value``` values with:
+        - where = ```between```
+        - string = ```TSN=```
+        - ending = ```;```
+    
+        <img src="images/request-attribute.png" >
 
-    Click add a new data source button and configure as shown below.
+    - To verify, paste in this value and click the ```preview processed output``` button to verify.
+        - ```x-dynatrace-test: LTN=myLoadTest;TSN=myTestStepName;```
+    - It should look like this:
 
-    - ensure HTTP request header is selected
-    - Fill in the value x-dynatrace-test for parameter name
-    - Expand the Further restrict or process captured parameters (optional) section
-    - fill in the  Preprocess parameter by extracting substring value of LSN
-    - To verify, paste in this value and click the preview processed output button to verify.
-    - ```x-dynatrace-test: LTN=myLoadTest;TSN=myTestStepName;```
+        <img src="images/request-attribute-verify.png" >
 
-    <img src="images/request-attribute-verify.png" >
+1. Save the data source request attribute rule
 
-1. Save the request attribute rule.
+1. Save the request attribute rule
 
 1. Now repeat the above steps to add a second request attribute for Load Test Name
 
-| **Request attributes Name**   | **Description**   | **Preprocessing parameter**   |
-| --- | --- | --- |
-| LTN  | Load Test Name  | LTN=  |
-| TSN  | Test Step Name  | TSN=  |
+    | **Request attributes Name**   | **Description**   | **Preprocessing parameter**   |
+    | --- | --- | --- |
+    | TSN  | Test Step Name  | TSN=  |
+    | LTN  | Load Test Name  | LTN=  |
 
 1. At the end you should see.
 
     <img src="images/request-attribute-list.png" >
 
-1. Run the load script for 120 seconds
+1. Run the send traffic script 
 
     ```
     cd ~/workshop/lab2
@@ -87,7 +97,7 @@ The header ```x-dynatrace-test``` is used one or more key/value pairs for th
 
     ```
     Load Test Started. DURATION=6 URL=http://[Your IP] THINKTIME=5
-    x-dynatrace-test: LSN=order\_loadtest.sh;LTN=manual 2019-12-17\_14:16:58;
+    x-dynatrace-test: LSN=order_loadtest.sh;LTN=manual 2019-12-17_14:16:58;
     14:16:58
     calling TSN=CatalogSearchLanding; 200
     calling TSN=CatalogSearch; 200
@@ -95,15 +105,17 @@ The header ```x-dynatrace-test``` is used one or more key/value pairs for th
     ...
     ```
 
-1. Let's checkout Dynatrace and see what happened. First navigate to transactions and services and click on the catalog  On the catalog service, click on the dynamic requests 
+1. Let's checkout Dynatrace and see what happened. First navigate to ```transactions and services``` and click on the ```catalog``` service. 
+
+1. Within the ```catalog``` service, click on ```view dynamic requests``` 
 
     <img src="images/dynamic-requests.png" >
 
-1. Now click on the request attributes button and review the requests with the Test Step Names (TSN) that are defined in the load test and match the rules we setup.
+1. Now click on the ```request attributes``` button and review the requests with the ```Test Step Names (TSN)``` that are defined in the load test and match the rules we setup.
 
     <img src="images/request-attribute-pages.png" >
 
-1. Click on one of the "Step names" and review the filtered chart results
+1. Click on one of the ```Step names``` and review the filtered chart results
 
 ## Add Request Naming rules
 
@@ -115,7 +127,7 @@ For the demo catalog service, each request URL to view a catalog item has the fo
 
 ## Exercise Steps
 
-1. To add a naming rule, click on the web request naming rule button
+1. To add a naming rule, click on the ```web request naming rule``` button
 
     <img src="images/edit-request-names.png"  width="600">
 
@@ -123,15 +135,17 @@ For the demo catalog service, each request URL to view a catalog item has the fo
 
     <img src="images/edit-catalog.png" >
 
-1. Within in the service settings, navigate to Web request naming and click the Add rule 
+1. Within in the service settings, navigate to Web request naming and click the ```Add rule``` button 
 
-    img src="images/catalog-naming-rule.png" >
+    <img src="images/catalog-naming-rule.png" >
 
-1. Configure the rule according to this picture:
+1. Configure the rule:
 
-    -  Fill in the value "Item Detail" for naming pattern
-    -  Choose "URL Path" and "contains regex" with the value /\d+.html
-    -  To verify, click the preview processed output button to verify
+    - naming pattern = ```Item Detail```
+    - conditions = ```URL Path```
+    - URL path = ```contains regex``` with the value ```/\d+.html```
+    - click the ```preview rule``` button to verify.
+    - It should look like this:
 
     <img src="images/request-naming-rule.png" >
 
@@ -140,7 +154,6 @@ For the demo catalog service, each request URL to view a catalog item has the fo
 1. The change will not update past requests, so we need to load script again so that the rule gets applied
 
     ```
-    cd ~/workshop/lab2
     ./sendtraffic.sh
     ```
 
@@ -164,11 +177,15 @@ For the demo catalog service, each request URL to view a catalog item has the fo
 
 In this lab, you should have completed the following:
 
-:white\_check\_mark: How to add x-dynatrace-test HTTP headers and see how they can be combined with Request Attributes rules
+:white_check_mark: How to add x-dynatrace-test HTTP headers and see how they can be combined with Request Attributes rules
 
-:white\_check\_mark: How to use Request Attributes rules during analysis
+:white_check_mark: How to use Request Attributes rules during analysis
 
-:white\_check\_mark: How to add Request Naming rules and see how they help during analysis
+:white_check_mark: How to add Request Naming rules and see how they help during analysis
+
+# References
+
+[Dynatrace and Load Testing Tools Integration](https://www.dynatrace.com/support/help/setup-and-configuration/integrations/third-party-integrations/test-automation-frameworks/dynatrace-and-load-testing-tools-integration/)
 
 <hr>
 

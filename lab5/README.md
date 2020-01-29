@@ -20,15 +20,11 @@ In this lab, you will:
 
 1. Activate your license in NeoLoad
 
-1. Click on the Account menu option
-
-    <img src="images/account.png" >
-
-1. Click on the subscription tab
+1. Click on the ```resources``` menu option and then the ```subscription``` tab
 
     <img src="images/subscription.png" >
 
-1. Click on the button Install button.  Use the file chooser to pick the license file you downloaded earlier.  Once uploaded, you should a valid license as shown here.
+1. Click on the ```Install license``` button.  Use the file chooser to pick the license file you downloaded earlier.  Once uploaded, you should a valid license as shown here.
 
     <img src="images/license.png" >
 
