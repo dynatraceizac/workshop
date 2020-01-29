@@ -1,5 +1,7 @@
 # Lab 2 Overview
 
+[Dynatrace and Load Testing Tools Integration](https://www.dynatrace.com/support/help/setup-and-configuration/integrations/third-party-integrations/test-automation-frameworks/dynatrace-and-load-testing-tools-integration/)
+
 Learn how to use Dynatrace features that support Performance testing for each phase: scripting, analysis, and reporting.  We will use the same demo application from the previous lab and use a simple Unix shell script to automate load.
 
 <img src="images/process.png" >
@@ -180,6 +182,10 @@ In this lab, you should have completed the following:
 :white_check_mark: How to use Request Attributes rules during analysis
 
 :white_check_mark: How to add Request Naming rules and see how they help during analysis
+
+# References
+
+[Dynatrace and Load Testing Tools Integration](https://www.dynatrace.com/support/help/setup-and-configuration/integrations/third-party-integrations/test-automation-frameworks/dynatrace-and-load-testing-tools-integration/)
 
 <hr>
 
