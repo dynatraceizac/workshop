@@ -14,6 +14,8 @@ In this lab, you will:
 
 ## Add Dynatrace API Token
 
+[Dynatrace API - Authentication](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/basics/dynatrace-api-authentication/)
+
 Dynatrace has a large set of APIs to manage the Dynatrace configuration such as tag, alert, maintenance windows and the environment such as retrieving timeseries and topology metrics, managing problems and events.
 
 We need to secure a Dynatrace API token for access to the Dynatrace REST-based API. All API calls pass this token in the request header as in this example sample:
@@ -134,6 +136,8 @@ We are going to review how to use the events API to push information-only ev
     <img src="images/hotspot.png" >
 
 ## Call Metrics v2 API
+
+[Dynatrace API](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/environment-api/)
 
 Many use cases within your software development and delivery pipelines depend on the real-time metrics that your Dynatrace environment collects. One example is the automatic check of monthly load-test results for performance reporting based on Dynatrace synthetic tests.
 
