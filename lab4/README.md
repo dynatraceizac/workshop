@@ -93,18 +93,24 @@ Here is a diagram of the additional validation step and interactions with Dynatr
   
   [Dashboards and Charts](https://www.dynatrace.com/support/help/how-to-use-dynatrace/dashboards-and-charts/)
 
-1. First we can examine the error rates.
+1. First we can examine the error rates. Navigate to ```transactions and services``` then select the ```order``` service, then select the ```View dynamic request``` then the ```Falure Rate``` tab.
 
    <img src="images/order-errors.png" >
  
-1. Now let's adjust the anomaly detection for the order service. 
+1. Now let's adjust the anomaly detection for the order service. Navigate back to the ```order``` service by selcting the ```order``` from the breadcrumb. 
+
+1. Now select ```Edit``` by selcting the ellipsis.
+
+   <img src="images/order-edit.png" >
+
+1. Set the following values for the ```Anomaly Detection```
 
    <img src="images/anomoly-adjustment.png" >
   
 1.  We will need to change these settings
-    * Turn off "global settings"
-    * change "Detect increase failure rate" to use "fixed thresholds"
-    * change "Alert" to use 3%
+    * Turn off ```"global settings"```
+    * change ```"Detect increase failure rate" to use "fixed thresholds"```
+    * change ```"Alert"``` to use 3%
 
 1. Run another pipline build with the order service version "2".
 
