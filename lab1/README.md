@@ -29,6 +29,8 @@ dtu_training@ip-10-0-0-54:~$ sudo ls
 
 ## Install Dynatrace OneAgent
 
+[Dynatrace OneAgent](https://www.dynatrace.com/support/help/setup-and-configuration/dynatrace-oneagent/#installation-and-operation)
+
 1. To install Dynatrace OneAgent, first login into your Dynatrace tenant. For example: ```https://<your tenant>.sprint.dynatracelabs.com```
 
 1. From the left side menu near the bottom, navigate to ```deploy Dynatrace```.  You should see this page
@@ -55,6 +57,8 @@ dtu_training@ip-10-0-0-54:~$ sudo ls
     <img src="images/host.png">
 
 ## Start the Demo Application
+
+[GitHub Doc](https://help.github.com/en/github)
 
 The demo application runs using Docker Compose.  Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application's services. See the [Application readme](../APPLICATION.md) for more details.
 
