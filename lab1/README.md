@@ -151,6 +151,8 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
 
 ## Add Tags
 
+[Tags and MetaData](https://www.dynatrace.com/support/help/how-to-use-dynatrace/tags-and-metadata/)
+
 Managing and organizing large monitoring environments is a real challenge. To effectively cope with this challenge, Dynatrace supports tags and metadata. Tags and metadata enable you to organize your monitored environments in a meaningful way.
 
 Tagging can be done on each layer of the stack to provide a variety of context.  These tags we will later see are used to query and push more data to the right entity during performance testing.
@@ -253,6 +255,8 @@ This Exercise shows adding a rule to use the service detected name as the tag 
 
 ## Add Management Zone
 
+[Management Zomes](https://www.dynatrace.com/support/help/how-to-use-dynatrace/management-zones/)
+
 Now that we have tags, we can use them in many ways such as charts, API calls as a feature called Management Zones.
 
 Management zones are a powerful information-partitioning mechanism that simultaneously promotes collaboration and the sharing of relevant team-specific data while still ensuring secure access controls.
@@ -294,6 +298,14 @@ In this lab, you should have completed the following:
 :white_check_mark: How to add Management Zone and use it to filter services 
 
 :white_check_mark: See how Dynatrace automatically monitors the application and where tags show up 
+
+# References
+
+[Tags and MetaData](https://www.dynatrace.com/support/help/how-to-use-dynatrace/tags-and-metadata/)
+
+[Tags based on Environment Variables](https://www.dynatrace.com/support/help/how-to-use-dynatrace/tags-and-metadata/setup/define-tags-based-on-environment-variables/)
+
+[Management Zones](https://www.dynatrace.com/support/help/how-to-use-dynatrace/management-zones/)
 
 <hr>
 
