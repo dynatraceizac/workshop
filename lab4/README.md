@@ -99,7 +99,7 @@ Here is a diagram of the additional validation step and interactions with Dynatr
  
 1. Now let's adjust the anomaly detection for the order service. Navigate back to the ```order``` service by selcting the ```order``` from the breadcrumb. 
 
-1. Now select ```Edit``` by selcting the ellipsis.
+1. Now select ```Edit``` after clicking the ellipsis.
 
    <img src="images/order-edit.png" >
 
@@ -134,7 +134,7 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 
    <img src="images/failure-chart.png" >
 
-1. From here click on the "Analyze failure rate degradation", then we will see the error details.
+1. From here click on the ```"Analyze failure rate degradation"```, then we will see the error details.
 
    <img src="images/error-details.png" >  
    
@@ -150,11 +150,11 @@ Here is a diagram of the additional validation step and interactions with Dynatr
 
 First we need to create a Dashbaord with a few tiles.
 
-1. Choose "Dahboards" from the menu.
+1. Choose ```"Dahboards"``` from the menu.
 
-1. Then select "create dashboard"
+1. Then select ```"create dashboard"```
     <img src="images/create-dashboard.png" >
-1. Give the Dashbaord a name and click "Create"
+1. Give the Dashbaord a name and click ```"Create"```
     <img src="images/dashboard-name.png" >
 1. Now we can add widgets to the dashboard.
     <img src="images/add-widgets.png" >
@@ -174,11 +174,11 @@ We will create a custom chart by slecting the custom chart tile.
 1. click on the chart tile
 
 1. Now you can see the Metric picker.
-1. select "Service", then "Failure Rate (any errors)"
+1. select ```"Service"```, then ```"Failure Rate (any errors)"```
 
     <img src="images/metric-picker.png" width=400 height=300 >
 
-1. Now you can adjust the chart. I chose a bar chart, then slect "update Dashboard tile"
+1. Now you can adjust the chart. I chose a bar chart, then slect ```"update Dashboard tile"```
 
 The Result is a chart tile on the dashboard which will allow you to see the failure rates over time and then drill into the failure rates from the dashboard.
 
