@@ -236,6 +236,18 @@ In this lab, you should have completed the following:
 
 :white_check_mark: Sample app is stopped
 
+# References
+
+[Tags and metadata](https://www.dynatrace.com/support/help/how-to-use-dynatrace/tags-and-metadata/)
+
+[Dynatrace API](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/)
+
+[Metrics API Blog](https://www.dynatrace.com/news/blog/integrate-dynatrace-more-easily-using-the-new-metrics-rest-api/)
+
+[Dynatrace Calculated Service Metrics and Metrics API - Video](https://www.youtube.com/watch?v=9ikvUilt9oA)
+
+
+
 <hr>
 
 :arrow_backward: [Previous Lab](../lab2) | [Next Lab](../lab4) :arrow_forward: 
