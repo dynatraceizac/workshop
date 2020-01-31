@@ -137,8 +137,6 @@ We are going to review how to use the events API to push information-only ev
 
 ## Call Metrics v2 API
 
-[Dynatrace API](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/environment-api/)
-
 Many use cases within your software development and delivery pipelines depend on the real-time metrics that your Dynatrace environment collects. One example is the automatic check of monthly load-test results for performance reporting based on Dynatrace synthetic tests.
 
 The Dynatrace REST API endpoint /api/v1/timeseries has long enabled API consumers to ingest individual metrics for the implementation of external use-cases. In the summer of 2019, an updated of metrics API endpoint /api/v2/metrics/series based on an improved metrics framework now provides:
@@ -147,7 +145,7 @@ The Dynatrace REST API endpoint /api/v1/timeseries has long enabled API cons
 - Globally unique metric keys that better integrate over multiple Dynatrace environments
 - Flexibility to extend Dynatrace and better fit it to your specific business cases
 
-Let's just show how to call it. Later, you can read more in this blog and the Dynatrace docs
+Let's just show how to call it. Later, you can read more in this blog and the Dynatrace [docs](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/environment-api/metric-v2/)
 
 ## Exercise Steps
 
