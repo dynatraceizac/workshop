@@ -19,13 +19,7 @@ The picture below shows the setup for the lab environment:
 
 The workshop VM instance is provisioned with an SSH web client tool.  Just open your browser to the location provided and login with the credentials provided as shown below:
 
-We will be running many commands as root.  So that the password gets cached, enter this command and enter the same password your used to connect to the VM.  Here is how he prompt looks:
-
-```
-dtu_training@ip-10-0-0-54:~$ sudo ls
-
-[sudo] password for dtu_training:
-```
+<img src="images/shellinabox.png">
 
 ## Install Dynatrace OneAgent
 
