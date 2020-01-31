@@ -23,8 +23,6 @@ The workshop VM instance is provisioned with an SSH web client tool.  Just open 
 
 ## Install Dynatrace OneAgent
 
-[Dynatrace OneAgent](https://www.dynatrace.com/support/help/setup-and-configuration/dynatrace-oneagent/#installation-and-operation)
-
 1. To install Dynatrace OneAgent, first login into your Dynatrace tenant. For example: ```https://<your tenant>.sprint.dynatracelabs.com```
 
 1. From the left side menu near the bottom, navigate to ```deploy Dynatrace```.  You should see this page
@@ -51,8 +49,6 @@ The workshop VM instance is provisioned with an SSH web client tool.  Just open 
     <img src="images/host.png">
 
 ## Start the Demo Application
-
-[GitHub Doc](https://help.github.com/en/github)
 
 The demo application runs using Docker Compose.  Docker Compose is a tool for defining and running multi-container Docker applications. With Compose, you use a YAML file to configure your application's services. See the [Application readme](../APPLICATION.md) for more details.
 
@@ -148,8 +144,6 @@ The demo application runs using Docker Compose.  Docker Compose is a tool for de
     <img src="images/service-flow.png">
 
 ## Add Tags
-
-[Tags and MetaData](https://www.dynatrace.com/support/help/how-to-use-dynatrace/tags-and-metadata/)
 
 Managing and organizing large monitoring environments is a real challenge. To effectively cope with this challenge, Dynatrace supports tags and metadata. Tags and metadata enable you to organize your monitored environments in a meaningful way.
 
@@ -252,8 +246,6 @@ This Exercise shows adding a rule to use the service detected name as the tag 
     <img src="images/service-tag-more.png">
 
 ## Add Management Zone
-
-[Management Zomes](https://www.dynatrace.com/support/help/how-to-use-dynatrace/management-zones/)
 
 Now that we have tags, we can use them in many ways such as charts, API calls as a feature called Management Zones.
 
