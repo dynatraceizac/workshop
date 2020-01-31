@@ -238,7 +238,11 @@ In this lab, you should have completed the following:
 
 [Tags and metadata](https://www.dynatrace.com/support/help/how-to-use-dynatrace/tags-and-metadata/)
 
-[Dynatrace API](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/)
+[Dynatrace API Overview](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/)
+
+[Dynatrace Events API](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/environment-api/events/)
+
+[Dynatrace Metrics v2 API](https://www.dynatrace.com/support/help/extend-dynatrace/dynatrace-api/environment-api/metric-v2/)
 
 [Metrics API Blog](https://www.dynatrace.com/news/blog/integrate-dynatrace-more-easily-using-the-new-metrics-rest-api/)
 
