@@ -187,6 +187,12 @@ In this lab, you should have completed the following:
 
 [Dynatrace and Load Testing Tools Integration](https://www.dynatrace.com/support/help/setup-and-configuration/integrations/third-party-integrations/test-automation-frameworks/dynatrace-and-load-testing-tools-integration/)
 
+[Request attributes](https://www.dynatrace.com/support/help/how-to-use-dynatrace/transactions-and-services/configuration/capture-request-attributes-based-on-web-request-data/)
+
+[Request Naming using request attributes](https://www.dynatrace.com/support/help/how-to-use-dynatrace/transactions-and-services/configuration/set-up-web-request-naming-using-request-attributes/)
+
+[Analysis using request attributes](https://www.dynatrace.com/support/help/how-to-use-dynatrace/transactions-and-services/analysis/filter-monitoring-data-via-request-attributes/)
+
 <hr>
 
 :arrow_backward: [Previous Lab](../lab1) | [Next Lab](../lab3) :arrow_forward: 
