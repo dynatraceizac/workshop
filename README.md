@@ -2,7 +2,7 @@
 
 This workshop shows you how to automate performance test execution and analysis tasks within your software delivery pipelines as to scale up the frequency of testing and improve quality of your applications.
 
-The workshop is broken into a set of mini-labs that are meant to be followed sequentially. The lab starts with the all the block and ends with a fully automated process.
+The workshop is broken into a set of mini-labs that are meant to be followed sequentially. The lab starts with learning all the building blocks and ends with a fully automated process.
 
 * [lab1](./lab1/README.md) - Connect to workshop VM, setup Dynatrace and demo application 
 * [lab2](./lab2/README.md) – Dynatrace features for performance analysis and automation
