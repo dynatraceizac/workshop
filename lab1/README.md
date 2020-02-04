@@ -190,7 +190,7 @@ This exercise shows the first way of using an environment variable called ```D
 1. start up the application with the new environment variables added.
 
     ```
-    sudo docker-compose -f docker-compose-with-tags.yaml up –d
+    sudo docker-compose -f docker-compose-with-tags.yaml up -d 
     ```
 
 1. verify running
