@@ -38,6 +38,12 @@ curl --request GET \
 
 Some of the lab provide scripts require the Dynatrace URL and API.  To save you from providing these time, we have a script that will prompt and save these to JSON file that will be read automatically.
 
+1. We saved you the problem of entering in the NeoLoad Token.  So run this command
+
+    ```
+    sudo cp /home/dtu_training/script-inputs.json /home/dtu_training/scripts/script-inputs.json
+    ```
+
 1. Run the script to provide your values
 
     ```
