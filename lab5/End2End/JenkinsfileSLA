@@ -179,7 +179,7 @@ pipeline {
 
                   sh "sed -i 's/HOST_TO_REPLACE/${IP}/'  ${NEOLOAD_ASCODEFILE}"
                   sh "sed -i 's/PORT_TO_REPLACE/80/' ${NEOLOAD_ASCODEFILE}"
-                  sh "sed -i 's/DTID_TO_REPLACE/${DYNATRACEID}/' ${NEOLOAD_ASCODEFILE}"
+                  sh "sed -i 's|DTID_TO_REPLACE|${DYNATRACEID}|' ${NEOLOAD_ASCODEFILE}"
                   sh "sed -i 's/APIKEY_TO_REPLACE/${DYNATRACEAPIKEY}/' ${NEOLOAD_ASCODEFILE}"
                   sh "sed -i 's,JSONFILE_TO_REPLACE,${NEOLOAD_ANOMALIEDETECTIONFILE},'  ${NEOLOAD_ASCODEFILE}"
                   sh "sed -i 's/TAGS_TO_REPLACE/${NL_DT_TAG}/' ${NEOLOAD_ASCODEFILE}"
